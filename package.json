@@ -1,6 +1,6 @@
 {
   "name": "antd-extensions",
-  "version": "1.1.1",
+  "version": "1.0.0",
   "description": "",
   "author": "leftstick",
   "license": "MIT",
@@ -19,7 +19,9 @@
     "deploy": "gh-pages -d example/build"
   },
   "peerDependencies": {
+    "antd": "^3.8.2",
     "prop-types": "^15.6.2",
+    "moment": "^2.22.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2"
   },
@@ -54,5 +56,8 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "antd": "^3.8.2"
+  }
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import moment from 'moment'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
 
@@ -10,9 +11,30 @@ import { TimeRangePicker } from 'antd-extensions'
 import PropsDoc from '../../../Components/PropsDoc'
 import { getRouteDefinition } from '../../../helpers/view'
 
+import 'antd/lib/date-picker/style/css'
+import 'antd/lib/radio/style/css'
+
 class TimeRangePickerDoc extends Component {
   static propTypes = {
     location: PropTypes.object.isRequired
+  }
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      value: {
+        type: 'CUSTOMIZE',
+        ranges: [1533081600000, 1534377600000]
+      }
+    }
+  }
+
+  _handleChange = value => {
+    console.log(`You're selection is ${JSON.stringify(value)}`)
+    this.setState({
+      value
+    })
   }
 
   render() {
@@ -29,8 +51,15 @@ class TimeRangePickerDoc extends Component {
 
         <h3>用法</h3>
 
+        <SyntaxHighlighter language="javascript" style={darcula}>
+          {`// 样式引入
+import 'antd/lib/date-picker/style/css'
+import 'antd/lib/radio/style/css'`}
+        </SyntaxHighlighter>
+
         <SyntaxHighlighter language="jsx" style={darcula}>
-          {`<TimeRangePicker style={Style}  />`}
+          {`// jsx组件使用
+<TimeRangePicker className={ClassName} style={Style} labels={Labels} value={Value} onChange={OnChange} disabledDate={DisabledDate} />`}
         </SyntaxHighlighter>
 
         <br />
@@ -38,88 +67,24 @@ class TimeRangePickerDoc extends Component {
         <PropsDoc
           data={[
             {
-              prop: 'mapId',
-              type: 'String',
-              description: '用来指定要打开哪个室内地图'
-            },
-            {
-              prop: 'style',
+              prop: 'labels',
               type: 'Object',
-              description: '指定地图容器样式'
+              description: `显示label枚举，默认值： { BTN_ALL: '全部', BTN_LAST_WEEK: '上周', BTN_LAST_MONTH: '上月', BTN_CUSTOMIZE: '自定义', PLACEHOLDER_START: '起始日期', PLACEHOLDER_END: '截止日期' }`
             },
             {
-              prop: 'fengmapSDK',
+              prop: 'value',
               type: 'Object',
-              description: '指定蜂鸟地图SDK'
+              description: `默认值，{ type: PropTypes.oneOf(['ALL', 'LAST_WEEK', 'LAST_MONTH', 'CUSTOMIZE']), ranges: [Date, Date] }`
             },
             {
-              prop: 'loadingTxt',
-              type: 'String',
-              description: '指定蜂鸟地图未加载完毕前的显示文字'
+              prop: 'onChange',
+              type: 'Function',
+              description: '数据变化时的回调函数'
             },
             {
-              prop: 'mapOptions',
-              type: 'Object',
-              description: (
-                <React.Fragment>
-                  请参考
-                  <a
-                    href="https://www.fengmap.com/docs/js/v2.1.1_beta/classes/fengmap.MapOptions.html"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    fengmap.MapOptions
-                  </a>
-                </React.Fragment>
-              )
-            },
-            {
-              prop: 'events',
-              type: 'Object',
-              description: (
-                <React.Fragment>
-                  键值组合，key的可用值： [
-                  {[
-                    'focusGroupIDChanged',
-                    'loadComplete',
-                    'mapClickNode',
-                    'mapScaleLevelChanged',
-                    'scaleLevelChanged',
-                    'visibleGroupIDsChanged'
-                  ].map((e, i) => {
-                    return (
-                      <span key={i}>
-                        <code className="codeRef">{e}</code>
-                        {i !== 5 ? ',' : ''}
-                      </span>
-                    )
-                  })}
-                  ]，value是事件响应函数
-                </React.Fragment>
-              )
-            },
-            {
-              prop: 'gestureEnableController',
-              type: 'Object',
-              description: (
-                <React.Fragment>
-                  键值组合，key的可用值： [
-                  {['enableMapPan', 'enableMapPinch', 'enableMapRotate', 'enableMapIncline'].map((e, i) => {
-                    return (
-                      <span key={i}>
-                        <code className="codeRef">{e}</code>
-                        {i !== 3 ? ',' : ''}
-                      </span>
-                    )
-                  })}
-                  ]，
-                  <code className="codeRef">value</code>
-                  是各状态的
-                  <code className="codeRef">boolean</code>
-                  值。 各<code className="codeRef">key</code>
-                  依次表示'禁用平移地图', '禁用缩放地图', '禁用旋转地图', '禁用倾斜地图'
-                </React.Fragment>
-              )
+              prop: 'disabledDate',
+              type: 'Function',
+              description: '针对DatePicker里禁用日期的回调函数'
             }
           ]}
         />
@@ -128,14 +93,57 @@ class TimeRangePickerDoc extends Component {
 
         <div className="mapExample">
           <h3>示例</h3>
-          <TimeRangePicker />
+          <TimeRangePicker
+            style={{ display: 'inline-block' }}
+            value={this.state.value}
+            onChange={this._handleChange}
+            disabledDate={current =>
+              current &&
+              current >
+                moment()
+                  .endOf('day')
+                  .subtract(1, 'days')
+            }
+          />
+          <br />
           <br />
 
           <SyntaxHighlighter language="jsx" style={darcula}>
-            {`export default function Example() {
-  return (
-    <TimeRangePicker />
-  )
+            {`export default class Example extends React.Component {
+  
+  constructor(props){
+    super(props)
+
+    this.state = {
+      value: {
+        type: 'CUSTOMIZE',
+        ranges: [1533081600000, 1534377600000]
+      }
+    }
+  }
+
+  _handleChange = value => {
+    console.log(\`You're selection is \${JSON.stringify(value)}\`)
+    this.setState({
+      value
+    })
+  }
+
+  render() {
+    return (
+      <TimeRangePicker
+        value={this.state.value}
+        onChange={this._handleChange}
+        disabledDate={current =>
+          current &&
+          current >
+            moment()
+              .endOf('day')
+              .subtract(1, 'days')
+        }
+      />
+    )
+  }
 }
 `}
           </SyntaxHighlighter>

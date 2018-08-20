@@ -12,20 +12,8 @@ const DEFAULT_TEXTS = {
   PLACEHOLDER_END: '截止日期'
 }
 
-const DEFAULT_LAYOUT = {
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'flex-start',
-  width: '100%',
-  height: '100%'
-}
-
 const STYLE_BTN_GROUP = {
   marginRight: '10px'
-}
-
-const STYLE_DATEPICKER = {
-  marginLeft: '5px'
 }
 
 class TimeRangePicker extends React.Component {
@@ -45,7 +33,8 @@ class TimeRangePicker extends React.Component {
       ranges: PropTypes.arrayOf(Date)
     }),
     onChange: PropTypes.func,
-    disabledDate: PropTypes.func
+    disabledDate: PropTypes.func,
+    multipleLines: PropTypes.bool
   }
 
   static defaultProps = {
@@ -105,15 +94,35 @@ class TimeRangePicker extends React.Component {
     })
   }
 
+  _getDefaultLayout = () => {
+    const { multipleLines } = this.props
+    return {
+      display: 'flex',
+      flexDirection: multipleLines ? 'column' : 'row',
+      alignItems: multipleLines ? 'flex-start' : 'center',
+      justifyContent: 'flex-start',
+      width: '100%',
+      height: '100%'
+    }
+  }
+
+  _getDatePickerStyle = () => {
+    const { multipleLines } = this.props
+    return {
+      marginLeft: multipleLines ? '0px' : '5px'
+    }
+  }
+
   render() {
     const { value, className, style, labels, disabledDate } = this.props
     const { type, ranges } = value
     const inputRanges = convertInputRanges(type, ranges)
 
     const finalLabels = Object.assign({}, DEFAULT_TEXTS, labels)
+
     return (
-      <div className={className} style={style}>
-        <div style={DEFAULT_LAYOUT}>
+      <div className={className} style={style} ref={this.containerRef}>
+        <div style={this._getDefaultLayout()}>
           <Radio.Group value={type} onChange={this.changeType}>
             <Radio.Button value="ALL" style={STYLE_BTN_GROUP}>
               {finalLabels.BTN_ALL}
@@ -128,8 +137,9 @@ class TimeRangePicker extends React.Component {
               {finalLabels.BTN_CUSTOMIZE}
             </Radio.Button>
           </Radio.Group>
+          {this.props.multipleLines ? <p style={{ width: '100%', height: '10px', margin: '0px' }} /> : null}
           <DatePicker.RangePicker
-            style={STYLE_DATEPICKER}
+            style={this._getDatePickerStyle()}
             size="default"
             value={inputRanges}
             onChange={this.changeCustomization}

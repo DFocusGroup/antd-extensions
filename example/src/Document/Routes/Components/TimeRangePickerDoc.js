@@ -10,6 +10,7 @@ import { TimeRangePicker } from 'antd-extensions'
 
 import PropsDoc from '../../../Components/PropsDoc'
 import { getRouteDefinition } from '../../../helpers/view'
+import { debounce } from '../../../helpers/func'
 
 import 'antd/lib/date-picker/style/css'
 import 'antd/lib/radio/style/css'
@@ -23,11 +24,31 @@ class TimeRangePickerDoc extends Component {
     super(props)
 
     this.state = {
+      multipleLines: false,
       value: {
         type: 'CUSTOMIZE',
         ranges: [1533081600000, 1534377600000]
       }
     }
+
+    this._resizeHandler = debounce(this._resizeHandler, 200)
+  }
+
+  _resizeHandler = () => {
+    const width = document.body.clientWidth
+    this.setState({
+      multipleLines: width < 640
+    })
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this._resizeHandler, false)
+
+    this._resizeHandler()
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._resizeHandler)
   }
 
   _handleChange = value => {
@@ -59,7 +80,15 @@ import 'antd/lib/radio/style/css'`}
 
         <SyntaxHighlighter language="jsx" style={darcula}>
           {`// jsx组件使用
-<TimeRangePicker className={ClassName} style={Style} labels={Labels} value={Value} onChange={OnChange} disabledDate={DisabledDate} />`}
+<TimeRangePicker 
+  className={ClassName}
+  style={Style}
+  labels={Labels}
+  value={Value}
+  onChange={OnChange}
+  disabledDate={DisabledDate}
+  multipleLines={MultipleLines}
+/>`}
         </SyntaxHighlighter>
 
         <br />
@@ -85,6 +114,11 @@ import 'antd/lib/radio/style/css'`}
               prop: 'disabledDate',
               type: 'Function',
               description: '针对DatePicker里禁用日期的回调函数'
+            },
+            {
+              prop: 'multipleLines',
+              type: 'Boolean',
+              description: '是否多行显示，常用于小屏幕时的场景'
             }
           ]}
         />
@@ -104,6 +138,7 @@ import 'antd/lib/radio/style/css'`}
                   .endOf('day')
                   .subtract(1, 'days')
             }
+            multipleLines={this.state.multipleLines}
           />
           <br />
           <br />

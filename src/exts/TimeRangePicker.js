@@ -109,21 +109,23 @@ class TimeRangePicker extends React.Component {
     const { value, className, style, labels, disabledDate } = this.props
     const { type, ranges } = value
     const inputRanges = convertInputRanges(type, ranges)
+
+    const finalLabels = Object.assign({}, DEFAULT_TEXTS, labels)
     return (
       <div className={className} style={style}>
         <div style={DEFAULT_LAYOUT}>
           <Radio.Group value={type} onChange={this.changeType}>
             <Radio.Button value="ALL" style={STYLE_BTN_GROUP}>
-              {labels.BTN_ALL}
+              {finalLabels.BTN_ALL}
             </Radio.Button>
             <Radio.Button value="LAST_WEEK" style={STYLE_BTN_GROUP}>
-              {labels.BTN_LAST_WEEK}
+              {finalLabels.BTN_LAST_WEEK}
             </Radio.Button>
             <Radio.Button value="LAST_MONTH" style={STYLE_BTN_GROUP}>
-              {labels.BTN_LAST_MONTH}
+              {finalLabels.BTN_LAST_MONTH}
             </Radio.Button>
             <Radio.Button value="CUSTOMIZE" style={STYLE_BTN_GROUP}>
-              {labels.BTN_CUSTOMIZE}
+              {finalLabels.BTN_CUSTOMIZE}
             </Radio.Button>
           </Radio.Group>
           <DatePicker.RangePicker
@@ -131,7 +133,7 @@ class TimeRangePicker extends React.Component {
             size="default"
             value={inputRanges}
             onChange={this.changeCustomization}
-            placeholder={[labels.PLACEHOLDER_START, labels.PLACEHOLDER_END]}
+            placeholder={[finalLabels.PLACEHOLDER_START, finalLabels.PLACEHOLDER_END]}
             disabled={type !== 'CUSTOMIZE'}
             disabledDate={disabledDate}
           />

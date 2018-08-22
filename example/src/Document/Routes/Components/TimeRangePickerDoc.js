@@ -12,9 +12,6 @@ import PropsDoc from '../../../Components/PropsDoc'
 import { getRouteDefinition } from '../../../helpers/view'
 import { debounce } from '../../../helpers/func'
 
-import 'antd/lib/date-picker/style/css'
-import 'antd/lib/radio/style/css'
-
 class TimeRangePickerDoc extends Component {
   static propTypes = {
     location: PropTypes.object.isRequired
@@ -71,12 +68,6 @@ class TimeRangePickerDoc extends Component {
         <p>{definition.description}</p>
 
         <h3>用法</h3>
-
-        <SyntaxHighlighter language="javascript" style={darcula}>
-          {`// 样式引入
-import 'antd/lib/date-picker/style/css'
-import 'antd/lib/radio/style/css'`}
-        </SyntaxHighlighter>
 
         <SyntaxHighlighter language="jsx" style={darcula}>
           {`// jsx组件使用

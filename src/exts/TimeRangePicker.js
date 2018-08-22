@@ -3,6 +3,9 @@ import moment from 'moment'
 import PropTypes from 'prop-types'
 import { Radio, DatePicker } from 'antd'
 
+import 'antd/lib/date-picker/style/css'
+import 'antd/lib/radio/style/css'
+
 const DEFAULT_TEXTS = {
   BTN_ALL: '全部',
   BTN_LAST_WEEK: '上周',

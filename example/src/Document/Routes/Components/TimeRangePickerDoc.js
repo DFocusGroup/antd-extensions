@@ -133,6 +133,8 @@ class TimeRangePickerDoc extends Component {
           />
           <br />
           <br />
+          <p>您已选择： [ {this.state.value.ranges.map(r => moment(r).format('YYYY-MM-DD HH:mm:ss')).join(', ')} ]</p>
+          <br />
 
           <SyntaxHighlighter language="jsx" style={darcula}>
             {`export default class Example extends React.Component {

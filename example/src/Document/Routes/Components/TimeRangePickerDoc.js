@@ -1,20 +1,15 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-router'
-
-import SyntaxHighlighter from 'react-syntax-highlighter/prism'
-import { darcula } from 'react-syntax-highlighter/styles/prism'
-
 import { TimeRangePicker } from 'antd-extensions'
 
+import Highlight from '../../../Components/Highlight'
+import withAPIDoc from '../../../Components/APIDoc'
 import PropsDoc from '../../../Components/PropsDoc'
-import { getRouteDefinition } from '../../../helpers/view'
-import { debounce } from '../../../helpers/func'
 
 class TimeRangePickerDoc extends Component {
   static propTypes = {
-    location: PropTypes.object.isRequired
+    screenWidth: PropTypes.number
   }
 
   constructor(props) {
@@ -27,25 +22,6 @@ class TimeRangePickerDoc extends Component {
         ranges: [1533081600000, 1534377600000]
       }
     }
-
-    this._resizeHandler = debounce(this._resizeHandler, 200)
-  }
-
-  _resizeHandler = () => {
-    const width = document.body.clientWidth
-    this.setState({
-      multipleLines: width < 640
-    })
-  }
-
-  componentDidMount() {
-    window.addEventListener('resize', this._resizeHandler, false)
-
-    this._resizeHandler()
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this._resizeHandler)
   }
 
   _handleChange = value => {
@@ -56,20 +32,14 @@ class TimeRangePickerDoc extends Component {
   }
 
   render() {
-    const { location } = this.props
-    const definition = getRouteDefinition(location.pathname)
-    if (!definition) {
-      return
-    }
+    const { screenWidth } = this.props
+    const multipleLines = screenWidth < 640
 
     return (
-      <div>
-        <h1>{definition.displayTitle}</h1>
-        <p>{definition.description}</p>
-
+      <React.Fragment>
         <h3>用法</h3>
 
-        <SyntaxHighlighter language="jsx" style={darcula}>
+        <Highlight language="jsx">
           {`// jsx组件使用
 <TimeRangePicker 
   className={ClassName}
@@ -80,7 +50,7 @@ class TimeRangePickerDoc extends Component {
   disabledDate={DisabledDate}
   multipleLines={MultipleLines}
 />`}
-        </SyntaxHighlighter>
+        </Highlight>
 
         <br />
 
@@ -129,14 +99,14 @@ class TimeRangePickerDoc extends Component {
                   .endOf('day')
                   .subtract(1, 'days')
             }
-            multipleLines={this.state.multipleLines}
+            multipleLines={multipleLines}
           />
           <br />
           <br />
           <p>您已选择： [ {this.state.value.ranges.map(r => moment(r).format('YYYY-MM-DD HH:mm:ss')).join(', ')} ]</p>
           <br />
 
-          <SyntaxHighlighter language="jsx" style={darcula}>
+          <Highlight language="jsx">
             {`export default class Example extends React.Component {
   
   constructor(props){
@@ -174,11 +144,11 @@ class TimeRangePickerDoc extends Component {
   }
 }
 `}
-          </SyntaxHighlighter>
+          </Highlight>
         </div>
-      </div>
+      </React.Fragment>
     )
   }
 }
 
-export default withRouter(TimeRangePickerDoc)
+export default withAPIDoc(TimeRangePickerDoc)

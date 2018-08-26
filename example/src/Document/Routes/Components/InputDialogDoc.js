@@ -1,21 +1,12 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { withRouter } from 'react-router'
 import { Button } from 'antd'
-
-import SyntaxHighlighter from 'react-syntax-highlighter/prism'
-import { darcula } from 'react-syntax-highlighter/styles/prism'
-
 import { InputDialog } from 'antd-extensions'
 
+import Highlight from '../../../Components/Highlight'
+import withAPIDoc from '../../../Components/APIDoc'
 import PropsDoc from '../../../Components/PropsDoc'
-import { getRouteDefinition } from '../../../helpers/view'
 
 class InputDialogDoc extends Component {
-  static propTypes = {
-    location: PropTypes.object.isRequired
-  }
-
   constructor(props) {
     super(props)
 
@@ -41,20 +32,11 @@ class InputDialogDoc extends Component {
   }
 
   render() {
-    const { location } = this.props
-    const definition = getRouteDefinition(location.pathname)
-    if (!definition) {
-      return
-    }
-
     return (
-      <div>
-        <h1>{definition.displayTitle}</h1>
-        <p>{definition.description}</p>
-
+      <React.Fragment>
         <h3>用法</h3>
 
-        <SyntaxHighlighter language="jsx" style={darcula}>
+        <Highlight language="jsx">
           {`// jsx组件使用
 <InputDialog 
   labels={Labels}
@@ -65,7 +47,7 @@ class InputDialogDoc extends Component {
   validator={Validator}
   visible={Visible}
 />`}
-        </SyntaxHighlighter>
+        </Highlight>
 
         <br />
 
@@ -156,7 +138,7 @@ class InputDialogDoc extends Component {
           <br />
           <br />
 
-          <SyntaxHighlighter language="jsx" style={darcula}>
+          <Highlight language="jsx">
             {`export default class Example extends React.Component {
   
   constructor(props){
@@ -205,11 +187,11 @@ class InputDialogDoc extends Component {
   }
 }
 `}
-          </SyntaxHighlighter>
+          </Highlight>
         </div>
-      </div>
+      </React.Fragment>
     )
   }
 }
 
-export default withRouter(InputDialogDoc)
+export default withAPIDoc(InputDialogDoc)

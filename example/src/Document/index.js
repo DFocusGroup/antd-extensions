@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { HashRouter } from 'react-router-dom'
+import { withRouter } from 'react-router'
+import PropTypes from 'prop-types'
+
 import { Layout } from 'antd'
 import throttle from 'lodash/throttle'
 
@@ -10,7 +12,11 @@ import { Routes } from './Routes'
 
 import './index.css'
 
-export default class Document extends Component {
+class Document extends Component {
+  static propTypes = {
+    location: PropTypes.object.isRequired
+  }
+
   constructor(props) {
     super(props)
 
@@ -37,9 +43,10 @@ export default class Document extends Component {
   }
 
   render() {
+    const { pathname } = this.props.location
     const padding = this.state.screenWidth <= 1000 ? '5px' : '0 24px 24px'
-    return (
-      <HashRouter>
+    if (pathname.startsWith('/api/')) {
+      return (
         <Layout>
           <Navigation />
           <Layout>
@@ -51,7 +58,22 @@ export default class Document extends Component {
             </Layout>
           </Layout>
         </Layout>
-      </HashRouter>
+      )
+    }
+
+    return (
+      <Layout>
+        <Navigation />
+        <Layout>
+          <Layout style={{ padding }}>
+            <Layout.Content style={{ background: '#fff', padding, margin: 0, minHeight: 900 }}>
+              <Routes />
+            </Layout.Content>
+          </Layout>
+        </Layout>
+      </Layout>
     )
   }
 }
+
+export default withRouter(Document)

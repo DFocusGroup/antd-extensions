@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router'
 import throttle from 'lodash/throttle'
-import { Layout, Drawer } from 'antd'
+import { Layout, Drawer, Menu } from 'antd'
 import { RawRoutes } from '../Routes'
 
 import './index.css'
 import logoURL from '../../assets/antd.svg'
 
-export default class Navigation extends Component {
+class Navigation extends Component {
+  static propTypes = {
+    location: PropTypes.object.isRequired
+  }
+
   constructor(props) {
     super(props)
 
@@ -21,6 +27,7 @@ export default class Navigation extends Component {
 
   componentDidMount() {
     window.addEventListener('resize', this._resizeHandler)
+    this._resizeHandler()
   }
 
   componentWillUnmount() {
@@ -43,9 +50,24 @@ export default class Navigation extends Component {
     })
   }
 
+  _selectMenu = ({ item, key, selectedKeys }) => {}
+
   render() {
+    const inSmallScreen = this.state.screenWidth <= 470
+
+    const { location } = this.props
+
+    const selectedKey = location.pathname.startsWith('/api/') ? '/api/timerangepicker' : '/home'
+
     return (
-      <Layout.Header className="header">
+      <Layout.Header
+        className="header"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          padding: `0px ${inSmallScreen ? '10px' : '50px'}`
+        }}
+      >
         <a href="https://github.com/DFocusFE/antd-extensions">
           <img
             style={{
@@ -59,8 +81,23 @@ export default class Navigation extends Component {
             data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"
           />
         </a>
-        <img src={logoURL} className="headerLogo" alt="" onClick={this._toggleSmallScreenMenu} />
-        <span className="headerTitle">antd-extensions</span>
+        <div>
+          <img src={logoURL} className="headerLogo" alt="" onClick={this._toggleSmallScreenMenu} />
+          <span className="headerTitle">{inSmallScreen ? 'antd-exts' : 'antd-extensions'}</span>
+        </div>
+        <Menu
+          mode="horizontal"
+          style={{ marginLeft: inSmallScreen ? '10px' : '30px', lineHeight: '65px' }}
+          onSelect={this._selectMenu}
+          selectedKeys={[selectedKey]}
+        >
+          <Menu.Item key="/home">
+            <Link to="/home">入门</Link>
+          </Menu.Item>
+          <Menu.Item key="/api/timerangepicker">
+            <Link to="/api/timerangepicker">文档</Link>
+          </Menu.Item>
+        </Menu>
         <Drawer
           title="文档"
           placement="left"
@@ -93,3 +130,5 @@ export default class Navigation extends Component {
     )
   }
 }
+
+export default withRouter(Navigation)

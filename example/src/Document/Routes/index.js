@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
+import Home from '../../Components/Home'
 import components from './Components'
 
 export class Routes extends Component {
@@ -10,7 +11,8 @@ export class Routes extends Component {
         {components.map(c => {
           return <Route key={c.url} exact path={c.url} component={c.component} />
         })}
-        <Redirect to="/timerangepicker" />
+        <Route exact path="/home" component={Home} />
+        <Redirect to="/api/timerangepicker" />
       </Switch>
     )
   }

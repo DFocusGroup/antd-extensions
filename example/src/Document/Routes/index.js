@@ -12,7 +12,7 @@ export class Routes extends Component {
           return <Route key={c.url} exact path={c.url} component={c.component} />
         })}
         <Route exact path="/home" component={Home} />
-        <Redirect to="/api/timerangepicker" />
+        <Redirect to="/home" />
       </Switch>
     )
   }

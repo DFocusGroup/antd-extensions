@@ -37,6 +37,7 @@ class Home extends React.Component {
               <a href="https://ant.design/">ant-design</a>
               ，这里或许也有一些您需要的组件哦！
             </p>
+            <p>是时候来一发炸裂的开场了！！！！</p>
             <h1>安装</h1>
             <Highlight language="bash">{`npm install antd-extensions`}</Highlight>
             <h1>引入</h1>

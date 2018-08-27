@@ -5,9 +5,8 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "antd": "^3.8.2",
+    "antd": "^3.8.4",
     "antd-extensions": "file:..",
-    "fengmap": "^2.1.2",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",

@@ -18,7 +18,7 @@ export default [
   {
     url: '/api/regionpicker',
     displayTitle: '<RegionPicker />',
-    description: '输入确认模态框',
+    description: '地址选择器，受控组件。通常用来选择国家、省、市、行政区',
     component: RegionPickerDoc
   }
 ]

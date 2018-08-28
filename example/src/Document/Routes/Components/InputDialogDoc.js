@@ -139,7 +139,11 @@ class InputDialogDoc extends Component {
           <br />
 
           <Highlight language="jsx">
-            {`export default class Example extends React.Component {
+            {`import React from 'react'
+import { Button } from 'antd'
+import { InputDialog } from 'antd-extensions'
+
+export default class Example extends React.Component {
   
   constructor(props){
     super(props)

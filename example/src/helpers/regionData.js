@@ -15,6 +15,7 @@ const STATES = [
   },
 
   {
+    parentId: 1,
     id: 3,
     name: '山西省',
     code: '140000'
@@ -100,7 +101,7 @@ const DISTRICTS = [
   }
 ]
 
-export function fetchRegions(type, parentId) {
+function fetchRegions(type, parentId) {
   if (type === 'country') {
     return delayResolve(COUNTRYS, 500)
   }
@@ -116,6 +117,22 @@ export function fetchRegions(type, parentId) {
   if (type === 'district') {
     return delayResolve(DISTRICTS.filter(s => s.parentId === parentId), 600)
   }
+}
+
+export function fetchCountries() {
+  return fetchRegions('country')
+}
+
+export function fetchStates(countryId) {
+  return fetchRegions('state', countryId)
+}
+
+export function fetchCities(stateId) {
+  return fetchRegions('city', stateId)
+}
+
+export function fetchDistricts(cityId) {
+  return fetchRegions('district', cityId)
 }
 
 function delayResolve(data, timeout) {

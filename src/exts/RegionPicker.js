@@ -28,9 +28,10 @@ class RegionPicker extends Component {
       noData: PropTypes.string
     }),
     showDistrict: PropTypes.bool,
-    showLines: PropTypes.oneOf([1, 2, 3, 4])
-    // value: PropTypes.object,
-    // onChange: PropTypes.func
+    showLines: PropTypes.oneOf([1, 2, 3, 4]),
+    dataRetriever: PropTypes.func,
+    onChange: PropTypes.func,
+    value: PropTypes.object
   }
 
   static defaultProps = {
@@ -46,8 +47,162 @@ class RegionPicker extends Component {
       countryLoading: false,
       stateLoading: false,
       cityLoading: false,
-      districtLoading: false
+      districtLoading: false,
+      countryList: null,
+      stateList: null,
+      cityList: null,
+      districtList: null,
+      countryValue: undefined,
+      stateValue: undefined,
+      cityValue: undefined,
+      districtValue: undefined
     }
+
+    this.isUnmount = false
+  }
+
+  componentDidMount() {
+    this._retrieveData('country')
+  }
+
+  componentWillUnmount() {
+    this.isUnmount = true
+  }
+
+  _retrieveData = (type, parent) => {
+    const { dataRetriever } = this.props
+    if (!dataRetriever || this.isUnmount) {
+      return
+    }
+
+    if (type !== 'country' && !parent) {
+      return
+    }
+
+    this.setState({
+      [`${type}Loading`]: true
+    })
+
+    const response = dataRetriever(type, parent)
+    if (!response || !response.then) {
+      throw new Error(
+        'dataRetriever you provided is not valid, it should return a Promise<Array<{label: string, value: string}>>'
+      )
+    }
+
+    response.then(res => {
+      if (this.isUnmount) {
+        return
+      }
+      this.setState(
+        {
+          [`${type}Loading`]: false,
+          [`${type}List`]: res
+        },
+        () => {
+          this._setDefaultValue(type)
+        }
+      )
+    })
+  }
+
+  _setDefaultValue = type => {
+    const { value } = this.props
+    if (!value || !value[type]) {
+      return
+    }
+    if (type === 'country') {
+      this._retrieveData('state', this._findByVal(this.state.countryList, value[type].value))
+    }
+    if (type === 'state') {
+      this._retrieveData('city', this._findByVal(this.state.stateList, value[type].value))
+    }
+    if (type === 'city') {
+      this._retrieveData('district', this._findByVal(this.state.cityList, value[type].value))
+    }
+    this.setState({
+      [`${type}Value`]: value[type].value
+    })
+  }
+
+  _onSelectChange = (type, val) => {
+    this._exposeValue(type, val)
+
+    if (type === 'country') {
+      this.setState({
+        countryValue: val,
+        stateValue: undefined,
+        cityValue: undefined,
+        districtValue: undefined,
+        stateList: null,
+        cityList: null,
+        districtList: null
+      })
+      this._retrieveData('state', this._findByVal(this.state.countryList, val))
+    }
+    if (type === 'state') {
+      this.setState({
+        stateValue: val,
+        cityValue: undefined,
+        districtValue: undefined,
+        cityList: null,
+        districtList: null
+      })
+      this._retrieveData('city', this._findByVal(this.state.stateList, val))
+    }
+    if (type === 'city') {
+      this.setState({
+        cityValue: val,
+        districtValue: undefined,
+        districtList: null
+      })
+      if (this.state.cityList) {
+        this._retrieveData('district', this._findByVal(this.state.cityList, val))
+      }
+    }
+
+    if (type === 'district') {
+      this.setState({
+        districtValue: val
+      })
+    }
+  }
+
+  _exposeValue = (type, val) => {
+    const { onChange } = this.props
+    if (!onChange) {
+      return
+    }
+    if (type === 'country') {
+      return onChange({
+        country: this._findByVal(this.state.countryList, val)
+      })
+    }
+    if (type === 'state') {
+      return onChange({
+        country: this._findByVal(this.state.countryList, this.state.countryValue),
+        state: this._findByVal(this.state.stateList, val)
+      })
+    }
+    if (type === 'city') {
+      return onChange({
+        country: this._findByVal(this.state.countryList, this.state.countryValue),
+        state: this._findByVal(this.state.stateList, this.state.stateValue),
+        city: this._findByVal(this.state.cityList, val)
+      })
+    }
+    if (type === 'district') {
+      return onChange({
+        country: this._findByVal(this.state.countryList, this.state.countryValue),
+        state: this._findByVal(this.state.stateList, this.state.stateValue),
+        city: this._findByVal(this.state.cityList, this.state.cityValue),
+        district: this._findByVal(this.state.districtList, val)
+      })
+    }
+  }
+
+  _findByVal = (list, val) => {
+    return list.find(c => `${c.value}` === `${val}`)
   }
 
   render() {
@@ -64,26 +219,74 @@ class RegionPicker extends Component {
         }}
       >
         <Select
-          style={getStyleForSelect(1, showLines)}
+          value={this.state.countryValue}
+          showSearch
+          style={getStyleForSelect(1, showLines, showDistrict)}
           placeholder={finalPlaceholders.country}
           notFoundContent={this.state.countryLoading ? <Spin size="small" /> : finalPlaceholders.noData}
-        />
+          onChange={val => this._onSelectChange('country', val)}
+        >
+          {this.state.countryList &&
+            this.state.countryList.map(c => {
+              return (
+                <Select.Option key={c.value} value={c.value}>
+                  {c.label}
+                </Select.Option>
+              )
+            })}
+        </Select>
         <Select
-          style={getStyleForSelect(2, showLines)}
+          value={this.state.stateValue}
+          showSearch
+          style={getStyleForSelect(2, showLines, showDistrict)}
           placeholder={finalPlaceholders.state}
           notFoundContent={this.state.stateLoading ? <Spin size="small" /> : finalPlaceholders.noData}
-        />
+          onChange={val => this._onSelectChange('state', val)}
+        >
+          {this.state.stateList &&
+            this.state.stateList.map(c => {
+              return (
+                <Select.Option key={c.value} value={c.value}>
+                  {c.label}
+                </Select.Option>
+              )
+            })}
+        </Select>
         <Select
-          style={getStyleForSelect(3, showLines)}
+          value={this.state.cityValue}
+          showSearch
+          style={getStyleForSelect(3, showLines, showDistrict)}
           placeholder={finalPlaceholders.city}
           notFoundContent={this.state.cityLoading ? <Spin size="small" /> : finalPlaceholders.noData}
-        />
+          onChange={val => this._onSelectChange('city', val)}
+        >
+          {this.state.cityList &&
+            this.state.cityList.map(c => {
+              return (
+                <Select.Option key={c.value} value={c.value}>
+                  {c.label}
+                </Select.Option>
+              )
+            })}
+        </Select>
         {showDistrict && (
           <Select
+            value={this.state.districtValue}
+            showSearch
             style={BASE_SELECT_STYLE}
             placeholder={finalPlaceholders.district}
             notFoundContent={this.state.districtLoading ? <Spin size="small" /> : finalPlaceholders.noData}
-          />
+            onChange={val => this._onSelectChange('district', val)}
+          >
+            {this.state.districtList &&
+              this.state.districtList.map(c => {
+                return (
+                  <Select.Option key={c.value} value={c.value}>
+                    {c.label}
+                  </Select.Option>
+                )
+              })}
+          </Select>
         )}
       </div>
     )
@@ -102,7 +305,7 @@ function getContainerWidth(showLines, totalElements) {
   return 180
 }
 
-function getStyleForSelect(index, showLines) {
+function getStyleForSelect(index, showLines, showDistrict) {
   if (index === 1) {
     return Object.assign({}, BASE_SELECT_STYLE, {
       marginRight: [1, 2].includes(showLines) ? '5px' : '',
@@ -118,8 +321,8 @@ function getStyleForSelect(index, showLines) {
 
   if (index === 3) {
     return Object.assign({}, BASE_SELECT_STYLE, {
-      marginRight: [1, 2].includes(showLines) ? '5px' : '',
-      marginBottom: [3, 4].includes(showLines) ? '5px' : ''
+      marginRight: [1, 2].includes(showLines) && showDistrict ? '5px' : '',
+      marginBottom: [3, 4].includes(showLines) && showDistrict ? '5px' : ''
     })
   }
 }

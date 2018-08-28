@@ -107,7 +107,10 @@ class TimeRangePickerDoc extends Component {
           <br />
 
           <Highlight language="jsx">
-            {`export default class Example extends React.Component {
+            {`import React from 'react'
+import { TimeRangePicker } from 'antd-extensions'
+
+export default class Example extends React.Component {
   
   constructor(props){
     super(props)

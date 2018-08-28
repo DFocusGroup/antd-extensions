@@ -1,11 +1,51 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Radio, Checkbox } from 'antd'
 import { RegionPicker } from 'antd-extensions'
 
 import Highlight from '../../../Components/Highlight'
 import withAPIDoc from '../../../Components/APIDoc'
 import PropsDoc from '../../../Components/PropsDoc'
+import { fetchCountries, fetchStates, fetchCities, fetchDistricts } from '../../../helpers/regionData'
 
 class RegionPickerDoc extends Component {
+  static propTypes = {
+    screenWidth: PropTypes.number
+  }
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      showLines: 1,
+      showDistrict: true,
+      value: {
+        country: {
+          value: 1
+        },
+        state: {
+          value: 3
+        },
+        city: {
+          value: 5
+        },
+        district: {
+          value: 13
+        }
+      }
+    }
+  }
+
+  _changeShowLines = e => {
+    this.setState({
+      showLines: +e.target.value
+    })
+  }
+
+  _convertData = list => {
+    return list.map(r => ({ label: r.name, value: r.id, ...r }))
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -16,6 +56,8 @@ class RegionPickerDoc extends Component {
 <RegionPicker 
   placeholders={Placeholders}
   showLines={ShowLines}
+  showDistrict={ShowDistrict}
+  dataRetriever={DataRetriever}
   value={Value}
   onChange={OnChange}
 />`}
@@ -50,49 +92,53 @@ class RegionPickerDoc extends Component {
               )
             },
             {
+              prop: 'showDistrict',
+              type: 'Boolean',
+              description: '是否显示行政区选择'
+            },
+            {
               prop: 'value',
-              type: 'String',
-              description: `输入框的默认值`
-            },
-            {
-              prop: 'maskClosable',
-              type: 'Boolean',
-              description: '点击模态框周围是否关闭触发模态框关闭操作'
-            },
-            {
-              prop: 'visible',
-              type: 'Boolean',
-              description: '模态框显示状态'
-            },
-            {
-              prop: 'validator',
-              type: 'Function',
+              type: 'Object',
               description: (
                 <React.Fragment>
-                  自定义校验（注意，callback 必须被调用），
-                  <code className="codeRef">function(value, callback)</code>
+                  一个包含了预选值内容的对象
+                  <code className="codeRef">
+                    &#123; country: &#123; value: string &#125;, state: &#123; value: string &#125;, city: &#123; value:
+                    string &#125;, district: &#123; value: string &#125; &#125;
+                  </code>
                 </React.Fragment>
               )
             },
             {
-              prop: 'onConfirm',
-              type: 'Function => void || Promise',
+              prop: 'dataRetriever',
+              type: 'Function(type: String, prevObj) => Promise<Array<label: String, value: String>>',
               description: (
                 <React.Fragment>
-                  输入内容满足了
-                  <code className="codeRef">validator</code>
-                  后会被调用
+                  数据抓取函数，接受两个参数，
+                  <code className="codeRef">type</code>和<code className="codeRef">prevObj</code>。 其中
+                  <br />
+                  <code className="codeRef">type</code>
+                  可能值是：
+                  <code className="codeRef">country</code>,<code className="codeRef">state</code>,
+                  <code className="codeRef">city</code>,<code className="codeRef">district</code>;<br />
+                  <code className="codeRef">prevObj</code>
+                  是前一个下拉区域选择的值。
+                  <br />
+                  返回值必须是一个
+                  <code className="codeRef">Promise&lt;Array&lt;label: String, value: String&gt;&gt;</code>
                 </React.Fragment>
               )
             },
             {
-              prop: 'onCancel',
-              type: 'Function',
+              prop: 'onChange',
+              type: 'Function(val)',
               description: (
                 <React.Fragment>
-                  点击取消按钮，或者
-                  <code className="codeRef">maskClosable = true</code>
-                  时点击模态框周围时触发
+                  选择回调，值为：
+                  <code className="codeRef">
+                    &#123; country: &#123; value: string &#125;, state?: &#123; value: string &#125;, city?: &#123;
+                    value: string &#125;, district?: &#123; value: string &#125; &#125;
+                  </code>
                 </React.Fragment>
               )
             }
@@ -103,56 +149,123 @@ class RegionPickerDoc extends Component {
 
         <div className="mapExample">
           <h3>示例</h3>
-          <RegionPicker showLines={1} />
-
+          <div>
+            {this.props.screenWidth > 880 ? (
+              <Radio.Group onChange={this._changeShowLines} defaultValue="1">
+                <Radio.Button value="1">1行显示</Radio.Button>
+                <Radio.Button value="2">2行显示</Radio.Button>
+                <Radio.Button value="3">3行显示</Radio.Button>
+                <Radio.Button value="4">4行显示</Radio.Button>
+              </Radio.Group>
+            ) : null}
+            &nbsp;&nbsp;&nbsp;
+            <Checkbox
+              checked={this.state.showDistrict}
+              onChange={e =>
+                this.setState({
+                  showDistrict: e.target.checked
+                })
+              }
+            >
+              包含行政区选项
+            </Checkbox>
+          </div>
           <br />
+          <RegionPicker
+            value={this.state.value}
+            showLines={this.props.screenWidth > 880 ? this.state.showLines : 4}
+            showDistrict={this.state.showDistrict}
+            dataRetriever={(type, prevObj) => {
+              if (type === 'country') {
+                return fetchCountries(type).then(this._convertData)
+              }
+              if (type === 'state') {
+                return fetchStates(prevObj.value).then(this._convertData)
+              }
+              if (type === 'city') {
+                return fetchCities(prevObj.value).then(this._convertData)
+              }
+              if (type === 'district') {
+                return fetchDistricts(prevObj.value).then(this._convertData)
+              }
+            }}
+            onChange={val => {
+              this.setState({
+                value: val
+              })
+            }}
+          />
           <br />
-
+          <p>
+            您选择了：
+            {JSON.stringify(this.state.value)}
+          </p>
+          <br />
           <Highlight language="jsx">
-            {`export default class Example extends React.Component {
+            {`import React from 'react'
+import { RegionPicker } from 'antd-extensions'
+
+export default class Example extends React.Component {
   
   constructor(props){
     super(props)
 
     this.state = {
-      visible: false,
-      value: ''
+      showLines: 1,
+      showDistrict: true,
+      value: {
+        country: {
+          value: 1
+        },
+        state: {
+          value: 3
+        },
+        city: {
+          value: 5
+        },
+        district: {
+          value: 13
+        }
+      }
     }
   }
 
-  toggleDialog = bool => {
+  _changeShowLines = e => {
     this.setState({
-      visible: bool
+      showLines: +e.target.value
     })
   }
 
-  confirm = () => {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve()
-        this.toggleDialog(false)
-      }, 2000)
-    })
+  _convertData = list => {
+    return list.map(r => ({ label: r.name, value: r.id, ...r }))
   }
 
   render() {
     return (
-      <div>
-        <InputDialog
-          visible={this.state.visible}
-          value={this.state.value}
-          labels={{ title: '确认删除吧', subTitle: '请键入 “你好”' }}
-          onCancel={() => this.toggleDialog(false)}
-          onConfirm={this.confirm}
-          validator={(val, cb) => {
-            if (val === '你好') {
-              return cb()
-            }
-            return cb('您输入的内容不正确')
-          }}
-        />
-        <Button onClick={() => this.toggleDialog(true)}>打开确认输入对话框</Button>
-      </div>
+      <RegionPicker
+        value={this.state.value}
+        showLines={this.state.showLines}
+        showDistrict={this.state.showDistrict}
+        dataRetriever={(type, prevObj) => {
+          if (type === 'country') {
+            return fetchCountries(type).then(this._convertData)
+          }
+          if (type === 'state') {
+            return fetchStates(prevObj.value).then(this._convertData)
+          }
+          if (type === 'city') {
+            return fetchCities(prevObj.value).then(this._convertData)
+          }
+          if (type === 'district') {
+            return fetchDistricts(prevObj.value).then(this._convertData)
+          }
+        }}
+        onChange={val => {
+          this.setState({
+            value: val
+          })
+        }}
+      />
     )
   }
 }

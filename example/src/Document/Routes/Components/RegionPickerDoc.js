@@ -60,6 +60,7 @@ class RegionPickerDoc extends Component {
   dataRetriever={DataRetriever}
   value={Value}
   onChange={OnChange}
+  cache={Cache}
 />`}
         </Highlight>
 
@@ -111,7 +112,7 @@ class RegionPickerDoc extends Component {
             },
             {
               prop: 'dataRetriever',
-              type: 'Function(type: String, prevObj) => Promise<Array<label: String, value: String>>',
+              type: 'Function(type: String, prevObj) => Promise<Array<{label: String, value: String}>>',
               description: (
                 <React.Fragment>
                   数据抓取函数，接受两个参数，
@@ -125,7 +126,9 @@ class RegionPickerDoc extends Component {
                   是前一个下拉区域选择的值。
                   <br />
                   返回值必须是一个
-                  <code className="codeRef">Promise&lt;Array&lt;label: String, value: String&gt;&gt;</code>
+                  <code className="codeRef">
+                    Promise&lt;Array&lt;&#123; label: String, value: String &#125;&gt;&gt;
+                  </code>
                 </React.Fragment>
               )
             },
@@ -139,6 +142,27 @@ class RegionPickerDoc extends Component {
                     &#123; country: &#123; value: string &#125;, state?: &#123; value: string &#125;, city?: &#123;
                     value: string &#125;, district?: &#123; value: string &#125; &#125;
                   </code>
+                </React.Fragment>
+              )
+            },
+            {
+              prop: 'cache',
+              type: '{getItem: Function, getItem: Function, clear: Function, removeItem: Function}',
+              description: (
+                <React.Fragment>
+                  数据缓存器，必须是一个类似
+                  <code className="codeRef">sessionStorage</code>
+                  ，或者
+                  <code className="codeRef">localStorage</code>
+                  的，
+                  <br />
+                  实现了
+                  <code className="codeRef">
+                    &#123; getItem: Function, getItem: Function, clear: Function, removeItem: Function &#125;
+                  </code>
+                  <br />
+                  属性的对象，默认值是：
+                  <code className="codeRef">sessionStorage</code>
                 </React.Fragment>
               )
             }

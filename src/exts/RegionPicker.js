@@ -18,6 +18,10 @@ const DEFAULT_PLACEHOLDERS = {
   noData: '无数据'
 }
 
+const STORAGE_PROPS = ['getItem', 'setItem', 'clear', 'removeItem']
+
+const STORAGE_PREFIX = 'antd-extensions-'
+
 class RegionPicker extends Component {
   static propTypes = {
     placeholders: PropTypes.shape({
@@ -31,13 +35,25 @@ class RegionPicker extends Component {
     showLines: PropTypes.oneOf([1, 2, 3, 4]),
     dataRetriever: PropTypes.func,
     onChange: PropTypes.func,
-    value: PropTypes.object
+    value: PropTypes.object,
+    cache(props, propName, componentName) {
+      const prop = props[propName]
+      if (prop === undefined || prop === false) {
+        return null
+      }
+
+      if (STORAGE_PROPS.every(p => prop && prop[p])) {
+        return null
+      }
+      throw new Error(`Invalid prop ${propName} supplied to ${componentName}. Validation failed.`)
+    }
   }
 
   static defaultProps = {
     placeholders: DEFAULT_PLACEHOLDERS,
     showDistrict: true,
-    showLines: 1
+    showLines: 1,
+    cache: window.sessionStorage
   }
 
   constructor(props) {
@@ -70,7 +86,7 @@ class RegionPicker extends Component {
   }
 
   _retrieveData = (type, parent) => {
-    const { dataRetriever } = this.props
+    const { dataRetriever, cache } = this.props
     if (!dataRetriever || this.isUnmount) {
       return
     }
@@ -83,7 +99,16 @@ class RegionPicker extends Component {
       [`${type}Loading`]: true
     })
 
-    const response = dataRetriever(type, parent)
+    let response = null
+    const storageKey = `${STORAGE_PREFIX}${type}-${parent ? parent.value : ''}`
+
+    if (cache) {
+      response = cache.getItem(storageKey)
+      response = !response ? dataRetriever(type, parent) : Promise.resolve(JSON.parse(response))
+    } else {
+      response = dataRetriever(type, parent)
+    }
+
     if (!response || !response.then) {
       throw new Error(
         'dataRetriever you provided is not valid, it should return a Promise<Array<{label: string, value: string}>>'
@@ -91,8 +116,12 @@ class RegionPicker extends Component {
     }
 
     response.then(res => {
-      if (this.isUnmount) {
+      if (this.isUnmount || !res) {
         return
+      }
+      dataValidator(type, res)
+      if (cache) {
+        cache.setItem(storageKey, JSON.stringify(res))
       }
       this.setState(
         {
@@ -324,5 +353,14 @@ function getStyleForSelect(index, showLines, showDistrict) {
       marginRight: [1, 2].includes(showLines) && showDistrict ? '5px' : '',
       marginBottom: [3, 4].includes(showLines) && showDistrict ? '5px' : ''
     })
+  }
+}
+
+function dataValidator(type, list) {
+  if (Object.prototype.toString.call(list) !== '[object Array]') {
+    throw new Error(`${type} data you provided in dataRetriever must be an array`)
+  }
+  if (list.some(item => !item.label || !item.value)) {
+    throw new Error(`${type} data you provided in dataRetriever must be Array<{label: string, value: string}>`)
   }
 }

@@ -103,19 +103,19 @@ const DISTRICTS = [
 
 function fetchRegions(type, parentId) {
   if (type === 'country') {
-    return delayResolve(COUNTRYS, 500)
+    return delayResolve(COUNTRYS, 800)
   }
 
   if (type === 'state') {
-    return delayResolve(STATES.filter(s => s.parentId === parentId), 600)
+    return delayResolve(STATES.filter(s => s.parentId === parentId), 1000)
   }
 
   if (type === 'city') {
-    return delayResolve(CITIES.filter(s => s.parentId === parentId), 600)
+    return delayResolve(CITIES.filter(s => s.parentId === parentId), 1500)
   }
 
   if (type === 'district') {
-    return delayResolve(DISTRICTS.filter(s => s.parentId === parentId), 600)
+    return delayResolve(DISTRICTS.filter(s => s.parentId === parentId), 1800)
   }
 }
 

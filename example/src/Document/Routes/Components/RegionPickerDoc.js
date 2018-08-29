@@ -147,7 +147,7 @@ class RegionPickerDoc extends Component {
             },
             {
               prop: 'cache',
-              type: '{getItem: Function, getItem: Function, clear: Function, removeItem: Function}',
+              type: '{getItem: Function, setItem: Function, clear: Function, removeItem: Function}',
               description: (
                 <React.Fragment>
                   数据缓存器，必须是一个类似
@@ -158,7 +158,7 @@ class RegionPickerDoc extends Component {
                   <br />
                   实现了
                   <code className="codeRef">
-                    &#123; getItem: Function, getItem: Function, clear: Function, removeItem: Function &#125;
+                    &#123; getItem: Function, setItem: Function, clear: Function, removeItem: Function &#125;
                   </code>
                   <br />
                   属性的对象，默认值是：

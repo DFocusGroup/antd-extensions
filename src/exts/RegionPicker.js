@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Select, Spin } from 'antd'
+import { isNil } from '../helpers/object'
 
 import 'antd/lib/select/style/css'
 import 'antd/lib/spin/style/css'
@@ -360,7 +361,7 @@ function dataValidator(type, list) {
   if (Object.prototype.toString.call(list) !== '[object Array]') {
     throw new Error(`${type} data you provided in dataRetriever must be an array`)
   }
-  if (list.some(item => !item.label || !item.value)) {
+  if (list.some(item => isNil(item.label) || isNil(item.value))) {
     throw new Error(`${type} data you provided in dataRetriever must be Array<{label: string, value: string}>`)
   }
 }

@@ -9,3 +9,7 @@ export function isNumber(obj) {
 export function isArray(obj) {
   return Object.prototype.toString.call(obj) === '[object Array]'
 }
+
+export function isString(obj) {
+  return Object.prototype.toString.call(obj) === '[object String]'
+}

@@ -100,6 +100,11 @@ class AuthWrapperDoc extends Component {
               prop: 'noMatch',
               type: 'Object',
               description: '当权限不满足时用来展示的内容'
+            },
+            {
+              prop: 'noMatchFeedback',
+              type: 'String',
+              description: '当权限不满足时，鼠标hover在noMatch元素上的提示语'
             }
           ]}
         />
@@ -117,7 +122,8 @@ class AuthWrapperDoc extends Component {
           <AuthWrapper
             value="EDIT"
             authorities={this.state.authorities}
-            noMatch={<Input style={{ width: 200 }} disabled placeholder="没权限，能怎么办？" value="" />}
+            noMatch={<Input style={{ width: 200 }} disabled placeholder="没权限，能怎么办？" />}
+            noMatchFeedback="您没有操作该内容的权限"
             matchKey="auth"
           >
             <Input style={{ width: 200 }} />
@@ -171,6 +177,7 @@ export default class Example extends React.Component {
         value="EDIT"
         authorities={this.state.authorities}
         noMatch={<Input style={{ width: 200 }} disabled placeholder="没权限，能怎么办？" />}
+        noMatchFeedback="您没有操作该内容的权限"
         matchKey="auth"
       >
         <Input style={{ width: 200 }} />

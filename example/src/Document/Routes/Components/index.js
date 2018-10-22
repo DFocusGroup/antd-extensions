@@ -1,6 +1,7 @@
 import TimeRangePickerDoc from './TimeRangePickerDoc'
 import InputDialogDoc from './InputDialogDoc'
 import RegionPickerDoc from './RegionPickerDoc'
+import RegionPicker2Doc from './RegionPicker2Doc'
 import AuthWrapperDoc from './AuthWrapperDoc'
 
 export default [
@@ -21,6 +22,12 @@ export default [
     displayTitle: '<RegionPicker />',
     description: '地址选择器，受控组件。通常用来选择国家、省、市、行政区',
     component: RegionPickerDoc
+  },
+  {
+    url: '/api/regionpicker2',
+    displayTitle: '<RegionPicker2 />',
+    description: '另一种形态的地址选择器，受控组件。通常用来选择国家、省、市、行政区',
+    component: RegionPicker2Doc
   },
   {
     url: '/api/authwrapper',

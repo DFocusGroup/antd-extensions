@@ -13,3 +13,14 @@ export function isArray(obj) {
 export function isString(obj) {
   return Object.prototype.toString.call(obj) === '[object String]'
 }
+
+export function omit(obj, keys) {
+  const newObj = {}
+  Object.keys(obj).forEach(k => {
+    if (keys.includes(k)) {
+      return
+    }
+    newObj[k] = obj[k]
+  })
+  return newObj
+}

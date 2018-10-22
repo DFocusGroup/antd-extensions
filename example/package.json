@@ -5,22 +5,22 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "antd": "^3.9.1",
+    "antd": "^3.10.1",
     "antd-extensions": "file:..",
     "prop-types": "^15.6.2",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-syntax-highlighter": "^8.0.1"
+    "react-syntax-highlighter": "^8.1.0"
   },
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build"
   },
   "devDependencies": {
-    "ajv": "^6.5.3",
-    "babel-plugin-import": "^1.8.0",
+    "ajv": "^6.5.4",
+    "babel-plugin-import": "^1.10.0",
     "babel-polyfill": "^6.26.0",
     "react-app-rewired": "^1.6.2",
     "react-scripts": "^1.1.5"

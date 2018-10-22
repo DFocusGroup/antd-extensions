@@ -40,7 +40,7 @@ class RegionPicker2Doc extends Component {
         <Highlight language="jsx">
           {`// jsx组件使用
 <RegionPicker2 
-  placeholders={Placeholders}
+  placeholder={Placeholder}
   defaultConstructLevel={DefaultConstructLevel}
   dataRetriever={DataRetriever}
   value={Value}
@@ -54,7 +54,7 @@ class RegionPicker2Doc extends Component {
         <PropsDoc
           data={[
             {
-              prop: 'placeholders',
+              prop: 'placeholder',
               type: 'Object',
               description: (
                 <React.Fragment>

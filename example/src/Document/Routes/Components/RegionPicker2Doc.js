@@ -55,7 +55,7 @@ class RegionPicker2Doc extends Component {
           data={[
             {
               prop: 'placeholder',
-              type: 'Object',
+              type: 'String',
               description: (
                 <React.Fragment>
                   显示placeholders枚举，默认值：

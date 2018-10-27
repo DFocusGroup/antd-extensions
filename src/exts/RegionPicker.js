@@ -33,6 +33,7 @@ class RegionPicker extends Component {
       noData: PropTypes.string
     }),
     showDistrict: PropTypes.bool,
+    disabled: PropTypes.bool,
     showLines: PropTypes.oneOf([1, 2, 3, 4]),
     dataRetriever: PropTypes.func,
     onChange: PropTypes.func,
@@ -53,6 +54,7 @@ class RegionPicker extends Component {
   static defaultProps = {
     placeholders: DEFAULT_PLACEHOLDERS,
     showDistrict: true,
+    disabled: false,
     showLines: 1,
     cache: window.sessionStorage
   }
@@ -236,7 +238,7 @@ class RegionPicker extends Component {
   }
 
   render() {
-    const { placeholders, showDistrict, showLines } = this.props
+    const { placeholders, showDistrict, showLines, disabled } = this.props
 
     const finalPlaceholders = Object.assign({}, DEFAULT_PLACEHOLDERS, placeholders)
     return (
@@ -249,6 +251,7 @@ class RegionPicker extends Component {
         }}
       >
         <Select
+          disabled={disabled}
           value={this.state.countryValue}
           showSearch
           style={getStyleForSelect(1, showLines, showDistrict)}
@@ -266,6 +269,7 @@ class RegionPicker extends Component {
             })}
         </Select>
         <Select
+          disabled={disabled}
           value={this.state.stateValue}
           showSearch
           style={getStyleForSelect(2, showLines, showDistrict)}
@@ -283,6 +287,7 @@ class RegionPicker extends Component {
             })}
         </Select>
         <Select
+          disabled={disabled}
           value={this.state.cityValue}
           showSearch
           style={getStyleForSelect(3, showLines, showDistrict)}
@@ -301,6 +306,7 @@ class RegionPicker extends Component {
         </Select>
         {showDistrict && (
           <Select
+            disabled={disabled}
             value={this.state.districtValue}
             showSearch
             style={BASE_SELECT_STYLE}

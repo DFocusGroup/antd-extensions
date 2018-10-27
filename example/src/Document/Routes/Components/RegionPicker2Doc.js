@@ -41,6 +41,7 @@ class RegionPicker2Doc extends Component {
           {`// jsx组件使用
 <RegionPicker2 
   placeholder={Placeholder}
+  disabled={Disabled}
   defaultConstructLevel={DefaultConstructLevel}
   dataRetriever={DataRetriever}
   value={Value}
@@ -76,6 +77,11 @@ class RegionPicker2Doc extends Component {
                   级，即：国家、省、市、区
                 </React.Fragment>
               )
+            },
+            {
+              prop: 'disabled',
+              type: 'Boolean',
+              description: '是否禁用该组件'
             },
             {
               prop: 'value',

@@ -57,6 +57,7 @@ class RegionPickerDoc extends Component {
   placeholders={Placeholders}
   showLines={ShowLines}
   showDistrict={ShowDistrict}
+  disabled={Disabled}
   dataRetriever={DataRetriever}
   value={Value}
   onChange={OnChange}
@@ -96,6 +97,11 @@ class RegionPickerDoc extends Component {
               prop: 'showDistrict',
               type: 'Boolean',
               description: '是否显示行政区选择'
+            },
+            {
+              prop: 'disabled',
+              type: 'Boolean',
+              description: '是否禁用该组件'
             },
             {
               prop: 'value',

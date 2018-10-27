@@ -16,6 +16,7 @@ class RegionPicker2 extends Component {
     className: PropTypes.string,
     style: PropTypes.object,
     placeholder: PropTypes.string,
+    disabled: PropTypes.bool,
     defaultConstructLevel: PropTypes.oneOf([1, 2, 3, 4]),
     dataRetriever: PropTypes.func,
     onChange: PropTypes.func,
@@ -35,6 +36,7 @@ class RegionPicker2 extends Component {
 
   static defaultProps = {
     placeholder: '请选择区域信息',
+    disabled: false,
     defaultConstructLevel: 4,
     cache: window.sessionStorage
   }
@@ -197,10 +199,11 @@ class RegionPicker2 extends Component {
   }
 
   render() {
-    const { className, style, placeholder } = this.props
+    const { className, style, placeholder, disabled } = this.props
     const { options, internalVal } = this.state
     return (
       <Cascader
+        disabled={disabled}
         className={className}
         style={style}
         placeholder={placeholder}

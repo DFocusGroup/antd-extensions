@@ -57,6 +57,7 @@ class RegionPickerDoc extends Component {
   placeholders={Placeholders}
   showLines={ShowLines}
   showDistrict={ShowDistrict}
+  getPopupContainer={GetPopupContainer}
   disabled={Disabled}
   dataRetriever={DataRetriever}
   value={Value}
@@ -102,6 +103,11 @@ class RegionPickerDoc extends Component {
               prop: 'disabled',
               type: 'Boolean',
               description: '是否禁用该组件'
+            },
+            {
+              prop: 'getPopupContainer',
+              type: 'Function(node: HTMLElement) => HTMLElement',
+              description: '默认值：() => document.body'
             },
             {
               prop: 'value',

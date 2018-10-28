@@ -33,6 +33,7 @@ class RegionPicker extends Component {
       noData: PropTypes.string
     }),
     showDistrict: PropTypes.bool,
+    getPopupContainer: PropTypes.func,
     disabled: PropTypes.bool,
     showLines: PropTypes.oneOf([1, 2, 3, 4]),
     dataRetriever: PropTypes.func,
@@ -238,7 +239,7 @@ class RegionPicker extends Component {
   }
 
   render() {
-    const { placeholders, showDistrict, showLines, disabled } = this.props
+    const { placeholders, showDistrict, showLines, disabled, getPopupContainer } = this.props
 
     const finalPlaceholders = Object.assign({}, DEFAULT_PLACEHOLDERS, placeholders)
     return (
@@ -253,6 +254,7 @@ class RegionPicker extends Component {
         <Select
           disabled={disabled}
           value={this.state.countryValue}
+          getPopupContainer={getPopupContainer}
           showSearch
           style={getStyleForSelect(1, showLines, showDistrict)}
           placeholder={finalPlaceholders.country}
@@ -271,6 +273,7 @@ class RegionPicker extends Component {
         <Select
           disabled={disabled}
           value={this.state.stateValue}
+          getPopupContainer={getPopupContainer}
           showSearch
           style={getStyleForSelect(2, showLines, showDistrict)}
           placeholder={finalPlaceholders.state}
@@ -289,6 +292,7 @@ class RegionPicker extends Component {
         <Select
           disabled={disabled}
           value={this.state.cityValue}
+          getPopupContainer={getPopupContainer}
           showSearch
           style={getStyleForSelect(3, showLines, showDistrict)}
           placeholder={finalPlaceholders.city}
@@ -308,6 +312,7 @@ class RegionPicker extends Component {
           <Select
             disabled={disabled}
             value={this.state.districtValue}
+            getPopupContainer={getPopupContainer}
             showSearch
             style={BASE_SELECT_STYLE}
             placeholder={finalPlaceholders.district}

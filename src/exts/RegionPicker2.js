@@ -17,6 +17,7 @@ class RegionPicker2 extends Component {
     style: PropTypes.object,
     placeholder: PropTypes.string,
     disabled: PropTypes.bool,
+    getPopupContainer: PropTypes.func,
     defaultConstructLevel: PropTypes.oneOf([1, 2, 3, 4]),
     dataRetriever: PropTypes.func,
     onChange: PropTypes.func,
@@ -199,10 +200,11 @@ class RegionPicker2 extends Component {
   }
 
   render() {
-    const { className, style, placeholder, disabled } = this.props
+    const { className, style, placeholder, disabled, getPopupContainer } = this.props
     const { options, internalVal } = this.state
     return (
       <Cascader
+        getPopupContainer={getPopupContainer}
         disabled={disabled}
         className={className}
         style={style}

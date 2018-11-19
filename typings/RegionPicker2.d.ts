@@ -7,6 +7,12 @@ export interface RegionPicker2Props {
     city: string
     district: string
   }
+  cache: {
+    getItem: Function
+    setItem: Function
+    clear: Function
+    removeItem: Function
+  }
   defaultConstructLevel: number
   disabled: boolean
   value: {

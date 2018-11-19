@@ -7,6 +7,12 @@ export interface RegionPickerProps {
     city: string
     district: string
   }
+  cache: {
+    getItem: Function
+    setItem: Function
+    clear: Function
+    removeItem: Function
+  }
   showLines: number
   showDistrict: boolean
   disabled: boolean

@@ -8,6 +8,7 @@
     "type": "git",
     "url": "git+https://github.com/DFocusFE/antd-extensions.git"
   },
+  "typings": "typings/index.d.ts",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",

@@ -1,10 +1,13 @@
 import React from 'react'
 import moment from 'moment'
+import 'moment/locale/zh-cn'
 import PropTypes from 'prop-types'
 import { Radio, DatePicker } from 'antd'
 
 import 'antd/lib/date-picker/style/css'
 import 'antd/lib/radio/style/css'
+
+moment.locale('zh-cn')
 
 const DEFAULT_TEXTS = {
   BTN_ALL: '全部',
@@ -186,9 +189,8 @@ function convertInputRanges(type, ranges) {
 
 function getLastWeekStart() {
   const today = moment()
-  const daystoLastMonday = 0 - (1 - today.isoWeekday()) + 7
-
-  return today.subtract(daystoLastMonday, 'days')
+  const lastWeekStart = today.weekday(0).subtract(1, 'weeks')
+  return lastWeekStart
 }
 
 function getLastWeekEnd() {

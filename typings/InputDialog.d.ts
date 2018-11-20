@@ -11,8 +11,8 @@ export interface InputDialogProps {
   value: string
   maskClosable: boolean
   visible: boolean
-  validator: Function
-  onConfirm(): void | Promise
+  validator: (value: string, callback: Function) => void
+  onConfirm: () => void | Promise
   onCancel: Function
 }
 

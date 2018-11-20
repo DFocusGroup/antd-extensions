@@ -4,7 +4,7 @@ export interface AuthWrapperProps {
   authorities: Array<any>
   value: string
   matchKey: string
-  noMatch: object
+  noMatch: JSX.Element | null
   noMatchFeedback: string
 }
 

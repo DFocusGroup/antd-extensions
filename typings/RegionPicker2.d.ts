@@ -21,14 +21,16 @@ export interface RegionPicker2Props {
     city: { value: string }
     district: { value: string }
   }
-  dataRetriever(type: String, prevObj): Promise<Array<{ label: String; value: String }>>
-  getPopupContainer(params: HTMLElement): HTMLElement
-  onChange(): {
-    country: { value: string }
-    state?: { value: string }
-    city?: { value: string }
-    district?: { value: string }
-  }
+  dataRetriever: (type: String, prevObj) => Promise<Array<{ label: String; value: String }>>
+  getPopupContainer: (params: HTMLElement) => HTMLElement
+  onChange: (
+    value: {
+      country: { value: string }
+      state?: { value: string }
+      city?: { value: string }
+      district?: { value: string }
+    }
+  ) => void
 }
 
 export interface RegionPicker2State {}

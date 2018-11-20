@@ -1,4 +1,5 @@
 import * as React from 'react'
+import * as Moment from 'moment'
 
 export interface TimeRangePickerProps {
   labels: {
@@ -11,10 +12,15 @@ export interface TimeRangePickerProps {
   }
   value: {
     type: 'ALL' | 'LAST_WEEK' | 'LAST_MONTH' | 'CUSTOMIZE'
-    ranges: [Date, Date]
+    ranges: Array<Date>
   }
-  onChange(): void
-  disabledDate(): void
+  onChange: (
+    value: {
+      type: 'ALL' | 'LAST_WEEK' | 'LAST_MONTH' | 'CUSTOMIZE'
+      ranges: Array<Date>
+    }
+  ) => void
+  disabledDate: (currentDate: Moment.Moment) => boolean
   multipleLines: boolean
 }
 

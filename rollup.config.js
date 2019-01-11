@@ -6,6 +6,8 @@ import url from 'rollup-plugin-url'
 
 import pkg from './package.json'
 
+const externalIds = ['antd', 'prop-types', 'moment', 'react', 'react-dom']
+
 export default {
   input: 'src/index.js',
   output: [
@@ -20,7 +22,9 @@ export default {
       sourcemap: true
     }
   ],
-  external: ['antd', 'prop-types', 'moment', 'react', 'react-dom'],
+  external: function(id, parent, isResolved) {
+    return !!(id && externalIds.some(e => id.startsWith(e)))
+  },
   plugins: [
     postcss({
       modules: true

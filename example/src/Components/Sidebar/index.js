@@ -1,55 +1,28 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
-import { withRouter } from 'react-router'
-import throttle from 'lodash/throttle'
+import Link from 'umi/link'
+import { connect } from 'dva'
 import { Layout, Menu, Icon } from 'antd'
 
-import './index.css'
+import { componentRoutes } from '../../routesConfig'
 
-import components from '../Routes/Components'
-
-class Sidebar extends Component {
+class Sidebar extends React.Component {
   static propTypes = {
-    location: PropTypes.object.isRequired
-  }
-
-  constructor(props) {
-    super(props)
-
-    this._resizeHandler = throttle(this._resizeHandler.bind(this), 250)
-
-    this.state = {
-      screenWidth: 0
-    }
-  }
-
-  componentDidMount() {
-    window.addEventListener('resize', this._resizeHandler)
-    this._resizeHandler()
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this._resizeHandler)
-  }
-
-  _resizeHandler() {
-    this.setState({
-      screenWidth: window.innerWidth
-    })
+    screenWidth: PropTypes.number,
+    locationPathname: PropTypes.string
   }
 
   getOpenKeys = () => {
-    const { location } = this.props
-    const full = [...components]
-    const found = full.find(c => c.url === location.pathname)
+    const { locationPathname } = this.props
+    const full = [...componentRoutes]
+    const found = full.find(c => c.url === locationPathname)
     if (!found) {
       return {
-        selectKey: components[0].url,
+        selectKey: componentRoutes[0].url,
         openKey: 'Components'
       }
     }
-    if (components.includes(found)) {
+    if (componentRoutes.includes(found)) {
       return {
         selectKey: found.url,
         openKey: 'Components'
@@ -58,7 +31,8 @@ class Sidebar extends Component {
   }
 
   render() {
-    if (this.state.screenWidth <= 1000) {
+    const { screenWidth } = this.props
+    if (screenWidth <= 1000) {
       return null
     }
     const openKey = this.getOpenKeys()
@@ -79,7 +53,7 @@ class Sidebar extends Component {
               </span>
             }
           >
-            {components.map(c => {
+            {componentRoutes.map(c => {
               return (
                 <Menu.Item key={c.url}>
                   <Link to={c.url}>{c.displayTitle}</Link>
@@ -93,4 +67,9 @@ class Sidebar extends Component {
   }
 }
 
-export default withRouter(Sidebar)
+export default connect(({ app }) => {
+  return {
+    screenWidth: app.screenWidth,
+    locationPathname: app.locationPathname
+  }
+})(Sidebar)

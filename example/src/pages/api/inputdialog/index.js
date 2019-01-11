@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Button } from 'antd'
 import { InputDialog } from 'antd-extensions'
 
@@ -6,7 +6,7 @@ import Highlight from '../../../Components/Highlight'
 import withAPIDoc from '../../../Components/APIDoc'
 import PropsDoc from '../../../Components/PropsDoc'
 
-class InputDialogDoc extends Component {
+class InputDialogDoc extends React.Component {
   constructor(props) {
     super(props)
 

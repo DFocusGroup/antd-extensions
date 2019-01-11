@@ -19,5 +19,7 @@ dist
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.umi
+.umi-production
 
 package-lock.json

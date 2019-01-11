@@ -1,7 +1,6 @@
 import React from 'react'
 import { Row, Col } from 'antd'
-
-import Highlight from '../Highlight'
+import Highlight from '../../Components/Highlight'
 
 class Home extends React.Component {
   render() {

@@ -1,5 +1,6 @@
-.ant-layout-header {
+.header {
   background-color: #fff;
+  display: flex;
   box-shadow: 0 2px 8px #f0f1f2;
   margin-bottom: 6px;
 }

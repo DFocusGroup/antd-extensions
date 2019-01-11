@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import PropTypes from 'prop-types'
+import { connect } from 'dva'
+
 import { TimeRangePicker } from 'antd-extensions'
 
-import Highlight from '../../../Components/Highlight'
 import withAPIDoc from '../../../Components/APIDoc'
+import Highlight from '../../../Components/Highlight'
 import PropsDoc from '../../../Components/PropsDoc'
 
 class TimeRangePickerDoc extends Component {
@@ -59,12 +61,14 @@ class TimeRangePickerDoc extends Component {
             {
               prop: 'labels',
               type: 'Object',
-              description: `显示label枚举，默认值： { BTN_ALL: '全部', BTN_LAST_WEEK: '上周', BTN_LAST_MONTH: '上月', BTN_CUSTOMIZE: '自定义', PLACEHOLDER_START: '起始日期', PLACEHOLDER_END: '截止日期' }`
+              description: `显示label枚举，默认值： { BTN_ALL: '全部', BTN_LAST_WEEK: '上周', BTN_LAST_MONTH: '上月', 
+              BTN_CUSTOMIZE: '自定义', PLACEHOLDER_START: '起始日期', PLACEHOLDER_END: '截止日期' }`
             },
             {
               prop: 'value',
               type: 'Object',
-              description: `默认值，{ type: PropTypes.oneOf(['ALL', 'LAST_WEEK', 'LAST_MONTH', 'CUSTOMIZE']), ranges: [Date, Date] }`
+              description: `默认值，{ type: PropTypes.oneOf(['ALL', 'LAST_WEEK', 'LAST_MONTH', 'CUSTOMIZE']), 
+              ranges: [Date, Date] }`
             },
             {
               prop: 'onChange',
@@ -154,4 +158,8 @@ export default class Example extends React.Component {
   }
 }
 
-export default withAPIDoc(TimeRangePickerDoc)
+export default connect(({ app }) => {
+  return {
+    screenWidth: app.screenWidth
+  }
+})(withAPIDoc(TimeRangePickerDoc))

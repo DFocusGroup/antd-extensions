@@ -101,6 +101,24 @@ const DISTRICTS = [
   }
 ]
 
+const BUILDINGS = [
+  {
+    parentId: 13,
+    id: 160,
+    name: '外滩SOHO',
+    code: '200002'
+  }
+]
+
+const FLOORS = [
+  {
+    parentId: 160,
+    id: 1100,
+    name: '2楼',
+    code: '1100-0002'
+  }
+]
+
 function fetchRegions(type, parentId) {
   if (type === 'country') {
     return delayResolve(COUNTRYS, 800)
@@ -116,6 +134,12 @@ function fetchRegions(type, parentId) {
 
   if (type === 'district') {
     return delayResolve(DISTRICTS.filter(s => s.parentId === parentId), 1800)
+  }
+  if (type === 'building') {
+    return delayResolve(BUILDINGS.filter(s => s.parentId === parentId), 500)
+  }
+  if (type === 'floor') {
+    return delayResolve(FLOORS.filter(s => s.parentId === parentId), 500)
   }
 }
 
@@ -133,6 +157,13 @@ export function fetchCities(stateId) {
 
 export function fetchDistricts(cityId) {
   return fetchRegions('district', cityId)
+}
+
+export function fetchBuildings(cityId) {
+  return fetchRegions('building', cityId)
+}
+export function fetchFloors(cityId) {
+  return fetchRegions('floor', cityId)
 }
 
 function delayResolve(data, timeout) {

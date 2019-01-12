@@ -17,7 +17,7 @@ export const componentRoutes = [
   {
     url: '/api/regionpicker2',
     displayTitle: '<RegionPicker2 />',
-    description: '另一种形态的地址选择器，受控组件。通常用来选择国家、省、市、行政区'
+    description: '另一种形态的地址选择器，受控组件。通常用来选择国家、省、市、行政区、楼房、楼层'
   },
   {
     url: '/api/authwrapper',

@@ -4,7 +4,14 @@ import { RegionPicker2 } from 'antd-extensions'
 import Highlight from '../../../Components/Highlight'
 import withAPIDoc from '../../../Components/APIDoc'
 import PropsDoc from '../../../Components/PropsDoc'
-import { fetchCountries, fetchStates, fetchCities, fetchDistricts } from '../../../helpers/regionData'
+import {
+  fetchCountries,
+  fetchStates,
+  fetchCities,
+  fetchDistricts,
+  fetchBuildings,
+  fetchFloors
+} from '../../../helpers/regionData'
 
 class RegionPicker2Doc extends Component {
   constructor(props) {
@@ -23,6 +30,12 @@ class RegionPicker2Doc extends Component {
         },
         district: {
           value: 13
+        },
+        building: {
+          value: 160
+        },
+        floor: {
+          value: 1100
         }
       }
     }
@@ -58,15 +71,7 @@ class RegionPicker2Doc extends Component {
             {
               prop: 'placeholder',
               type: 'String',
-              description: (
-                <React.Fragment>
-                  显示placeholders枚举，默认值：
-                  <code className="codeRef">
-                    &#123; country: '请选择国家', state: '请选择省', city: '请选择市', district: '请选择区', noData:
-                    '无数据' &#125;
-                  </code>
-                </React.Fragment>
-              )
+              description: '默认值：请选择区域信息'
             },
             {
               prop: 'defaultConstructLevel',
@@ -75,7 +80,7 @@ class RegionPicker2Doc extends Component {
                 <React.Fragment>
                   控制组件提供多少级内容，默认
                   <code className="codeRef">4</code>
-                  级，即：国家、省、市、区
+                  级，即：国家、省、市、区、楼、楼层
                 </React.Fragment>
               )
             },
@@ -97,7 +102,8 @@ class RegionPicker2Doc extends Component {
                   一个包含了预选值内容的对象
                   <code className="codeRef">
                     &#123; country: &#123; value: string &#125;, state: &#123; value: string &#125;, city: &#123; value:
-                    string &#125;, district: &#123; value: string &#125; &#125;
+                    string &#125;, district: &#123; value: string &#125;, building: &#123; value: string &#125;, floor:
+                    &#123; value: string &#125; &#125;
                   </code>
                 </React.Fragment>
               )
@@ -167,9 +173,9 @@ class RegionPicker2Doc extends Component {
           <h3>示例</h3>
           <br />
           <RegionPicker2
-            style={{ width: '300px' }}
+            style={{ width: '380px' }}
             value={this.state.value}
-            defaultConstructLevel={4}
+            defaultConstructLevel={6}
             dataRetriever={(type, prevObj) => {
               if (type === 'country') {
                 return fetchCountries(type).then(this._convertData)
@@ -182,6 +188,12 @@ class RegionPicker2Doc extends Component {
               }
               if (type === 'district') {
                 return fetchDistricts(prevObj.value).then(this._convertData)
+              }
+              if (type === 'building') {
+                return fetchBuildings(prevObj.value).then(this._convertData)
+              }
+              if (type === 'floor') {
+                return fetchFloors(prevObj.value).then(this._convertData)
               }
             }}
             onChange={val => {
@@ -219,6 +231,12 @@ export default class Example extends React.Component {
         },
         district: {
           value: 13
+        },
+        building: {
+          value: 160
+        },
+        floor: {
+          value: 1100
         }
       }
     }
@@ -231,9 +249,9 @@ export default class Example extends React.Component {
   render() {
     return (
       <RegionPicker
-        style={{ width: '300px' }}
+        style={{ width: '380px' }}
         value={this.state.value}
-        defaultConstructLevel={4}
+        defaultConstructLevel={6}
         dataRetriever={(type, prevObj) => {
           if (type === 'country') {
             return fetchCountries(type).then(this._convertData)
@@ -246,6 +264,12 @@ export default class Example extends React.Component {
           }
           if (type === 'district') {
             return fetchDistricts(prevObj.value).then(this._convertData)
+          }
+          if (type === 'building') {
+            return fetchBuildings(prevObj.value).then(this._convertData)
+          }
+          if (type === 'floor') {
+            return fetchFloors(prevObj.value).then(this._convertData)
           }
         }}
         onChange={val => {

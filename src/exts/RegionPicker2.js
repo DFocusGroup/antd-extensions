@@ -5,7 +5,7 @@ import { isNil, omit } from '../helpers/object'
 
 import 'antd/lib/cascader/style/css'
 
-const TYPES = ['country', 'state', 'city', 'district']
+const TYPES = ['country', 'state', 'city', 'district', 'building', 'floor']
 
 const STORAGE_PROPS = ['getItem', 'setItem', 'clear', 'removeItem']
 
@@ -18,7 +18,7 @@ class RegionPicker2 extends Component {
     placeholder: PropTypes.string,
     disabled: PropTypes.bool,
     getPopupContainer: PropTypes.func,
-    defaultConstructLevel: PropTypes.oneOf([1, 2, 3, 4]),
+    defaultConstructLevel: PropTypes.oneOf([1, 2, 3, 4, 5, 6]),
     dataRetriever: PropTypes.func,
     onChange: PropTypes.func,
     value: PropTypes.object,
@@ -145,6 +145,19 @@ class RegionPicker2 extends Component {
       const found = this._findByVal(parent, value[type].value)
       if (found) {
         this._retrieveData([0, 1, found])
+      }
+    }
+    if (type === 'district') {
+      const found = this._findByVal(parent, value[type].value)
+      if (found) {
+        this._retrieveData([0, 1, 2, found])
+      }
+    }
+    if (type === 'building') {
+      const found = this._findByVal(parent, value[type].value)
+      console.log('found', value[type].value, found)
+      if (found) {
+        this._retrieveData([0, 1, 2, 3, found])
       }
     }
   }

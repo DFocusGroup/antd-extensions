@@ -9,7 +9,10 @@ function AuthWrapper(props) {
   const { value, children, noMatch, noMatchFeedback, matchKey, authorities } = props
 
   if (!authorities || !authorities.length) {
-    return children
+    if (!noMatch) {
+      return null
+    }
+    return noMatch
   }
 
   if (matchAuth(authorities, matchKey, value)) {

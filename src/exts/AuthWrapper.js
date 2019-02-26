@@ -22,6 +22,7 @@ function AuthWrapper(props) {
   if (!noMatch) {
     return null
   }
+
   if (!noMatchFeedback) {
     return noMatch
   }

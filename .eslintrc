@@ -1,8 +1,20 @@
 {
-  "extends": ["eslint-config-umi", "plugin:prettier/recommended"],
-  "plugins": ["prettier"],
+  "extends": [
+    "eslint-config-umi",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": [
+    "prettier"
+  ],
   "rules": {
-    "max-len": ["error", { "code": 120 }],
-    "react/prop-types": ["error"]
+    "max-len": [
+      "error",
+      {
+        "code": 120
+      }
+    ],
+    "react/prop-types": [
+      "error"
+    ]
   }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Cascader } from 'antd'
-import { isNil, omit } from '../helpers/object'
+import { isNil, omit } from '../../helpers/object'
 
 import 'antd/lib/cascader/style/css'
 

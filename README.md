@@ -5,6 +5,16 @@
 ![][dt-url]
 ![][license-url]
 
+## test
+
+```bash
+npm test
+```
+采用[Jest](https://jestjs.io/en/) + [Enzyme](https://airbnb.io/enzyme/)进行单元测试
+
+目前单元测试还在补充，望有志之士一起加入。
+单测在组件目录下的__tests__中，写单测时请尽量保证覆盖率 > 95% 并考虑边界情况，如果不能做到测试用例全覆盖，优先覆盖底层逻辑。
+
 ## Install
 
 ```bash

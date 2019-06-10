@@ -1,6 +1,7 @@
 # antd-extensions
 
 [![NPM version][npm-image]][npm-url]
+![][travis-url]
 ![][david-url]
 ![][dt-url]
 ![][license-url]
@@ -10,10 +11,11 @@
 ```bash
 npm test
 ```
+
 采用[Jest](https://jestjs.io/en/) + [Enzyme](https://airbnb.io/enzyme/)进行单元测试
 
 目前单元测试还在补充，望有志之士一起加入。
-单测在组件目录下的__tests__中，写单测时请尽量保证覆盖率 > 95% 并考虑边界情况，如果不能做到测试用例全覆盖，优先覆盖底层逻辑。
+单测在组件目录下的**tests**中，写单测时请尽量保证覆盖率 > 95% 并考虑边界情况，如果不能做到测试用例全覆盖，优先覆盖底层逻辑。
 
 ## Install
 
@@ -84,5 +86,6 @@ class Example extends Component {
 [npm-url]: https://npmjs.org/package/antd-extensions
 [npm-image]: https://badge.fury.io/js/antd-extensions.png
 [david-url]: https://david-dm.org/DFocusFE/antd-extensions.png
+[travis-url]: https://api.travis-ci.com/DFocusFE/antd-extensions.svg?branch=master
 [dt-url]: https://img.shields.io/npm/dt/antd-extensions.svg
 [license-url]: https://img.shields.io/npm/l/antd-extensions.svg

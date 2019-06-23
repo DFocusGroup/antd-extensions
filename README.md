@@ -6,7 +6,7 @@
 ![][dt-url]
 ![][license-url]
 
-## test
+## Test
 
 ```bash
 npm test

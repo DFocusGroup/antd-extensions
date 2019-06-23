@@ -6,6 +6,9 @@
   "plugins": [
     "prettier"
   ],
+  "env": {
+    "jquery": true
+  },
   "rules": {
     "max-len": [
       "error",

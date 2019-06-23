@@ -29,6 +29,7 @@
   "scripts": {
     "build": "rollup -c",
     "start": "rollup -c -w",
+    "coverage": "cat ./coverage/lcov.info | coveralls",
     "test": "jest --config ./jest.config.js",
     "prepare": "npm run build",
     "predeploy": "cd example && npm install && npm run build",
@@ -51,6 +52,7 @@
     "babel-eslint": "^9.0.0",
     "babel-jest": "^24.8.0",
     "babel-plugin-import": "^1.11.0",
+    "coveralls": "^3.0.4",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.13.2",
     "eslint": "^5.12.0",

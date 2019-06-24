@@ -1,8 +1,8 @@
 # antd-extensions
 
-[![NPM version][npm-image]][npm-url]
-![][travis-url]
-![][coverage-url]
+[![NPM Version][npm-image]][npm-url]
+[![Build Status][travis-image]][travis-url]
+[![Coverage Status][coverage-image]][coverage-url]
 ![][david-url]
 ![][dt-url]
 ![][license-url]
@@ -87,7 +87,9 @@ class Example extends Component {
 [npm-url]: https://npmjs.org/package/antd-extensions
 [npm-image]: https://badge.fury.io/js/antd-extensions.png
 [david-url]: https://david-dm.org/DFocusFE/antd-extensions.png
-[travis-url]: https://api.travis-ci.com/DFocusFE/antd-extensions.svg?branch=master
-[coverage-url]: https://coveralls.io/repos/github/DFocusFE/antd-extensions/badge.svg?branch=master
+[travis-image]: https://api.travis-ci.com/DFocusFE/antd-extensions.svg?branch=master
+[travis-url]: https://travis-ci.com/DFocusFE/antd-extensions
+[coverage-image]: https://coveralls.io/repos/github/DFocusFE/antd-extensions/badge.svg?branch=master
+[coverage-url]: https://coveralls.io/github/DFocusFE/antd-extensions
 [dt-url]: https://img.shields.io/npm/dt/antd-extensions.svg
 [license-url]: https://img.shields.io/npm/l/antd-extensions.svg

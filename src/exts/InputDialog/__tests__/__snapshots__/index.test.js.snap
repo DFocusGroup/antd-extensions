@@ -44,6 +44,7 @@ initialize {
                         "attribs": Object {
                           "aria-label": "Close",
                           "class": "ant-modal-close",
+                          "type": "button",
                         },
                         "children": Array [
                           Object {
@@ -1333,10 +1334,12 @@ initialize {
                         "x-attribsNamespace": Object {
                           "aria-label": undefined,
                           "class": undefined,
+                          "type": undefined,
                         },
                         "x-attribsPrefix": Object {
                           "aria-label": undefined,
                           "class": undefined,
+                          "type": undefined,
                         },
                       },
                       Object {
@@ -2513,6 +2516,7 @@ initialize {
                           "attribs": Object {
                             "aria-label": "Close",
                             "class": "ant-modal-close",
+                            "type": "button",
                           },
                           "children": Array [
                             Object {
@@ -2624,10 +2628,12 @@ initialize {
                           "x-attribsNamespace": Object {
                             "aria-label": undefined,
                             "class": undefined,
+                            "type": undefined,
                           },
                           "x-attribsPrefix": Object {
                             "aria-label": undefined,
                             "class": undefined,
+                            "type": undefined,
                           },
                         },
                         "type": "tag",
@@ -3804,6 +3810,7 @@ initialize {
                             "attribs": Object {
                               "aria-label": "Close",
                               "class": "ant-modal-close",
+                              "type": "button",
                             },
                             "children": Array [
                               Object {
@@ -3915,10 +3922,12 @@ initialize {
                             "x-attribsNamespace": Object {
                               "aria-label": undefined,
                               "class": undefined,
+                              "type": undefined,
                             },
                             "x-attribsPrefix": Object {
                               "aria-label": undefined,
                               "class": undefined,
+                              "type": undefined,
                             },
                           },
                           "type": "tag",
@@ -3997,6 +4006,7 @@ initialize {
                       "attribs": Object {
                         "aria-label": "Close",
                         "class": "ant-modal-close",
+                        "type": "button",
                       },
                       "children": Array [
                         Object {
@@ -5286,10 +5296,12 @@ initialize {
                       "x-attribsNamespace": Object {
                         "aria-label": undefined,
                         "class": undefined,
+                        "type": undefined,
                       },
                       "x-attribsPrefix": Object {
                         "aria-label": undefined,
                         "class": undefined,
+                        "type": undefined,
                       },
                     },
                     Object {
@@ -6466,6 +6478,7 @@ initialize {
                         "attribs": Object {
                           "aria-label": "Close",
                           "class": "ant-modal-close",
+                          "type": "button",
                         },
                         "children": Array [
                           Object {
@@ -6577,10 +6590,12 @@ initialize {
                         "x-attribsNamespace": Object {
                           "aria-label": undefined,
                           "class": undefined,
+                          "type": undefined,
                         },
                         "x-attribsPrefix": Object {
                           "aria-label": undefined,
                           "class": undefined,
+                          "type": undefined,
                         },
                       },
                       "type": "tag",
@@ -7757,6 +7772,7 @@ initialize {
                           "attribs": Object {
                             "aria-label": "Close",
                             "class": "ant-modal-close",
+                            "type": "button",
                           },
                           "children": Array [
                             Object {
@@ -7868,10 +7884,12 @@ initialize {
                           "x-attribsNamespace": Object {
                             "aria-label": undefined,
                             "class": undefined,
+                            "type": undefined,
                           },
                           "x-attribsPrefix": Object {
                             "aria-label": undefined,
                             "class": undefined,
+                            "type": undefined,
                           },
                         },
                         "type": "tag",
@@ -7970,6 +7988,7 @@ initialize {
                         "attribs": Object {
                           "aria-label": "Close",
                           "class": "ant-modal-close",
+                          "type": "button",
                         },
                         "children": Array [
                           Object {
@@ -9259,10 +9278,12 @@ initialize {
                         "x-attribsNamespace": Object {
                           "aria-label": undefined,
                           "class": undefined,
+                          "type": undefined,
                         },
                         "x-attribsPrefix": Object {
                           "aria-label": undefined,
                           "class": undefined,
+                          "type": undefined,
                         },
                       },
                       Object {
@@ -10439,6 +10460,7 @@ initialize {
                           "attribs": Object {
                             "aria-label": "Close",
                             "class": "ant-modal-close",
+                            "type": "button",
                           },
                           "children": Array [
                             Object {
@@ -10550,10 +10572,12 @@ initialize {
                           "x-attribsNamespace": Object {
                             "aria-label": undefined,
                             "class": undefined,
+                            "type": undefined,
                           },
                           "x-attribsPrefix": Object {
                             "aria-label": undefined,
                             "class": undefined,
+                            "type": undefined,
                           },
                         },
                         "type": "tag",
@@ -11730,6 +11754,7 @@ initialize {
                             "attribs": Object {
                               "aria-label": "Close",
                               "class": "ant-modal-close",
+                              "type": "button",
                             },
                             "children": Array [
                               Object {
@@ -11841,10 +11866,12 @@ initialize {
                             "x-attribsNamespace": Object {
                               "aria-label": undefined,
                               "class": undefined,
+                              "type": undefined,
                             },
                             "x-attribsPrefix": Object {
                               "aria-label": undefined,
                               "class": undefined,
+                              "type": undefined,
                             },
                           },
                           "type": "tag",
@@ -11990,6 +12017,7 @@ initialize {
                       "attribs": Object {
                         "aria-label": "Close",
                         "class": "ant-modal-close",
+                        "type": "button",
                       },
                       "children": Array [
                         Object {
@@ -13279,10 +13307,12 @@ initialize {
                       "x-attribsNamespace": Object {
                         "aria-label": undefined,
                         "class": undefined,
+                        "type": undefined,
                       },
                       "x-attribsPrefix": Object {
                         "aria-label": undefined,
                         "class": undefined,
+                        "type": undefined,
                       },
                     },
                     Object {
@@ -14459,6 +14489,7 @@ initialize {
                         "attribs": Object {
                           "aria-label": "Close",
                           "class": "ant-modal-close",
+                          "type": "button",
                         },
                         "children": Array [
                           Object {
@@ -14570,10 +14601,12 @@ initialize {
                         "x-attribsNamespace": Object {
                           "aria-label": undefined,
                           "class": undefined,
+                          "type": undefined,
                         },
                         "x-attribsPrefix": Object {
                           "aria-label": undefined,
                           "class": undefined,
+                          "type": undefined,
                         },
                       },
                       "type": "tag",
@@ -15750,6 +15783,7 @@ initialize {
                           "attribs": Object {
                             "aria-label": "Close",
                             "class": "ant-modal-close",
+                            "type": "button",
                           },
                           "children": Array [
                             Object {
@@ -15861,10 +15895,12 @@ initialize {
                           "x-attribsNamespace": Object {
                             "aria-label": undefined,
                             "class": undefined,
+                            "type": undefined,
                           },
                           "x-attribsPrefix": Object {
                             "aria-label": undefined,
                             "class": undefined,
+                            "type": undefined,
                           },
                         },
                         "type": "tag",
@@ -15943,6 +15979,7 @@ initialize {
                     "attribs": Object {
                       "aria-label": "Close",
                       "class": "ant-modal-close",
+                      "type": "button",
                     },
                     "children": Array [
                       Object {
@@ -17232,10 +17269,12 @@ initialize {
                     "x-attribsNamespace": Object {
                       "aria-label": undefined,
                       "class": undefined,
+                      "type": undefined,
                     },
                     "x-attribsPrefix": Object {
                       "aria-label": undefined,
                       "class": undefined,
+                      "type": undefined,
                     },
                   },
                   Object {
@@ -18412,6 +18451,7 @@ initialize {
                       "attribs": Object {
                         "aria-label": "Close",
                         "class": "ant-modal-close",
+                        "type": "button",
                       },
                       "children": Array [
                         Object {
@@ -18523,10 +18563,12 @@ initialize {
                       "x-attribsNamespace": Object {
                         "aria-label": undefined,
                         "class": undefined,
+                        "type": undefined,
                       },
                       "x-attribsPrefix": Object {
                         "aria-label": undefined,
                         "class": undefined,
+                        "type": undefined,
                       },
                     },
                     "type": "tag",
@@ -19703,6 +19745,7 @@ initialize {
                         "attribs": Object {
                           "aria-label": "Close",
                           "class": "ant-modal-close",
+                          "type": "button",
                         },
                         "children": Array [
                           Object {
@@ -19814,10 +19857,12 @@ initialize {
                         "x-attribsNamespace": Object {
                           "aria-label": undefined,
                           "class": undefined,
+                          "type": undefined,
                         },
                         "x-attribsPrefix": Object {
                           "aria-label": undefined,
                           "class": undefined,
+                          "type": undefined,
                         },
                       },
                       "type": "tag",
@@ -19916,6 +19961,7 @@ initialize {
                       "attribs": Object {
                         "aria-label": "Close",
                         "class": "ant-modal-close",
+                        "type": "button",
                       },
                       "children": Array [
                         Object {
@@ -21205,10 +21251,12 @@ initialize {
                       "x-attribsNamespace": Object {
                         "aria-label": undefined,
                         "class": undefined,
+                        "type": undefined,
                       },
                       "x-attribsPrefix": Object {
                         "aria-label": undefined,
                         "class": undefined,
+                        "type": undefined,
                       },
                     },
                     Object {
@@ -22385,6 +22433,7 @@ initialize {
                         "attribs": Object {
                           "aria-label": "Close",
                           "class": "ant-modal-close",
+                          "type": "button",
                         },
                         "children": Array [
                           Object {
@@ -22496,10 +22545,12 @@ initialize {
                         "x-attribsNamespace": Object {
                           "aria-label": undefined,
                           "class": undefined,
+                          "type": undefined,
                         },
                         "x-attribsPrefix": Object {
                           "aria-label": undefined,
                           "class": undefined,
+                          "type": undefined,
                         },
                       },
                       "type": "tag",
@@ -23676,6 +23727,7 @@ initialize {
                           "attribs": Object {
                             "aria-label": "Close",
                             "class": "ant-modal-close",
+                            "type": "button",
                           },
                           "children": Array [
                             Object {
@@ -23787,10 +23839,12 @@ initialize {
                           "x-attribsNamespace": Object {
                             "aria-label": undefined,
                             "class": undefined,
+                            "type": undefined,
                           },
                           "x-attribsPrefix": Object {
                             "aria-label": undefined,
                             "class": undefined,
+                            "type": undefined,
                           },
                         },
                         "type": "tag",

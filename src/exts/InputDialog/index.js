@@ -2,14 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Modal, Input, Form, Button, Row, Icon } from 'antd'
 
-import 'antd/lib/input/style/css'
-import 'antd/lib/modal/style/css'
-import 'antd/lib/form/style/css'
-import 'antd/lib/button/style/css'
-import 'antd/lib/row/style/css'
-import 'antd/lib/icon/style/css'
-import 'antd/lib/layout/style/css'
-
 const DEFAULT_LABELS = {
   title: '确认输入内容',
   confirm: '确认',

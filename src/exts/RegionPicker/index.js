@@ -3,9 +3,6 @@ import PropTypes from 'prop-types'
 import { Select, Spin } from 'antd'
 import { BASE_SELECT_STYLE, getContainerWidth, getStyleForSelect, dataValidator } from './util'
 
-import 'antd/lib/select/style/css'
-import 'antd/lib/spin/style/css'
-
 const DEFAULT_PLACEHOLDERS = {
   country: '请选择国家',
   state: '请选择省',

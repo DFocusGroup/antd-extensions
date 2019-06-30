@@ -4,9 +4,6 @@ import 'moment/locale/zh-cn'
 import PropTypes from 'prop-types'
 import { Radio, DatePicker } from 'antd'
 
-import 'antd/lib/date-picker/style/css'
-import 'antd/lib/radio/style/css'
-
 moment.locale('zh-cn')
 
 const DEFAULT_TEXTS = {

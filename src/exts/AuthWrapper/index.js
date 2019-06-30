@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import { Tooltip } from 'antd'
 import { matchAuth } from './util'
 
-import 'antd/lib/tooltip/style/css'
-
 function AuthWrapper(props) {
   const { value, children, noMatch, noMatchFeedback, matchKey, authorities } = props
 

@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import { Cascader } from 'antd'
 import { isNil, omit } from '../../helpers/object'
 
-import 'antd/lib/cascader/style/css'
-
 const TYPES = ['country', 'state', 'city', 'district', 'building', 'floor']
 
 const STORAGE_PROPS = ['getItem', 'setItem', 'clear', 'removeItem']

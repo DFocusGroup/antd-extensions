@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Modal, Input, Form, Button, Row, Icon } from 'antd'
 
+// 解决inputDialog的样式问题，babel-plugin-import依赖处理有问题，引入layout样式兼容
+import 'antd/lib/layout/style'
+
 const DEFAULT_LABELS = {
   title: '确认输入内容',
   confirm: '确认',

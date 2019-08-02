@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import _ from 'lodash'
 import { AutoComplete, Input } from 'antd'
+import { uniqArray, differenceArray } from './util'
 
 /**
  * 实现缓存最新搜索数据的搜索框UI
@@ -48,8 +48,8 @@ class AutoCompleteCache extends Component {
     const { localStorageKey, cacheLength = 10 } = this.props
     const { cache } = this.state
 
-    const uniqCache = _.uniq([text].concat(cache))
-    const differenceCache = _.difference(uniqCache, [null, undefined, ''])
+    const uniqCache = uniqArray([text].concat(cache))
+    const differenceCache = differenceArray(uniqCache, [null, undefined, ''])
     let c = differenceCache
     if (differenceCache.length > cacheLength) {
       c = differenceCache.slice(0, cacheLength)

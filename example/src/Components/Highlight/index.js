@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { default as SyntaxHighlighter } from 'react-syntax-highlighter/dist/esm/prism'
-import { darcula } from 'react-syntax-highlighter/dist/styles/prism'
+import { darcula } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 export default class Highlight extends React.Component {
   static propTypes = {

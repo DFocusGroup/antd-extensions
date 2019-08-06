@@ -31,9 +31,9 @@
     "start": "rollup -c -w",
     "coverage": "cat ./coverage/lcov.info | coveralls",
     "test": "jest --config ./jest.config.js",
-    "prepare": "npm run build",
-    "predeploy": "cd example && npm install && npm run build",
-    "deploy": "gh-pages -d example/dist"
+    "prepare": "yarn build",
+    "predeploy": "cd example && yarn && yarn build",
+    "deploy": "gh-pages -d example/dist --git git"
   },
   "peerDependencies": {
     "antd": "^3.9.1",

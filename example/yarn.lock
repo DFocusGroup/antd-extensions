@@ -14474,7 +14474,7 @@ umi-webpack-bundle-analyzer@^3.3.3:
     opener "^1.5.1"
     ws "^6.0.0"
 
-umi@^2.8.17:
+umi@^2.8.16:
   version "2.8.16"
   resolved "https://registry.npm.taobao.org/umi/download/umi-2.8.16.tgz#ded5403b94c87ba4d3b403ec477a3fcd381bdf6f"
   integrity sha1-3tVAO5TIe6TTtAPsR3o/zTgb328=

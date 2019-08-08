@@ -7,8 +7,8 @@ import { uniqArray, differenceArray } from './util'
  * 实现缓存最新搜索数据的搜索框UI
  * @param  {string} localStorageKey          本地缓存的key值,必须有的属性
  * @param  {number} cacheLength              缓存最近最新搜索的条数，默认十条
- * @param  {string} placeholder              输入框提示语,默认无值
- * @param  {func}   onSearch                 获取选中或点击enter，返回输入值
+ * @param  {string} placeholder              输入框提示语,默认无值undefined
+ * @param  {func}   onSearch                 获取选中记录或点击enter，返回输入值
  * @param  {string} size                     'small','middle','large',默认为'large'
  * @param  {bool}   allowClear               清除输入框，默认为true
  * @param  {bool}   defaultActiveFirstOption 是否默认高亮第一个选项,默认不高亮false

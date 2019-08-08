@@ -23,6 +23,11 @@ export const componentRoutes = [
     url: '/api/authwrapper',
     displayTitle: '<AuthWrapper />',
     description: '权限匹配组件，帮助你通过权限匹配来控制组件的展示、状态。。。'
+  },
+  {
+    url: '/api/autoCompleteCache',
+    displayTitle: '<AutoCompleteCache />',
+    description: '缓存搜索输入框，自动提示最新搜索记录'
   }
 ]
 

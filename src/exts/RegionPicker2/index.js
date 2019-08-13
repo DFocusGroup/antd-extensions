@@ -220,7 +220,7 @@ class RegionPicker2 extends Component {
         className={className}
         style={style}
         placeholder={placeholder}
-        options={options}
+        options={options || []}
         value={internalVal}
         loadData={this._retrieveData}
         onChange={this._onSelectChange}

@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DFocusFE/antd-extensions.git"
+    "url": "git+https://github.com/DFocusGroup/antd-extensions.git"
   },
   "typings": "typings/index.d.ts",
   "main": "dist/index.js",

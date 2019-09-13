@@ -12,14 +12,14 @@ class Home extends React.Component {
               <span>热烈欢迎您的star &nbsp;&nbsp;</span>
               <iframe
                 title="star"
-                src="https://ghbtns.com/github-btn.html?user=DFocusFE&repo=antd-extensions&type=star&count=true"
+                src="https://ghbtns.com/github-btn.html?user=DFocusGroup&repo=antd-extensions&type=star&count=true"
                 frameBorder="0"
                 width="100"
                 height="20"
               />
               <iframe
                 title="fork"
-                src="https://ghbtns.com/github-btn.html?user=DFocusFE&repo=antd-extensions&type=fork&count=true"
+                src="https://ghbtns.com/github-btn.html?user=DFocusGroup&repo=antd-extensions&type=fork&count=true"
                 frameBorder="0"
                 width="100"
                 height="20"

@@ -26,7 +26,7 @@ npm install --save antd-extensions
 
 [ant-design](https://ant.design/)的 DFocus 扩展组件库，帮助开发者选择需要的组件，并迅速进入角色。
 
-完整 API 使用文档，请[这边走](https://dfocusfe.github.io/antd-extensions)
+完整 API 使用文档，请[这边走](https://DFocusGroup.github.io/antd-extensions)
 
 ## Usage
 
@@ -82,14 +82,14 @@ class Example extends Component {
 
 ## LICENSE
 
-[MIT License](https://raw.githubusercontent.com/DFocusFE/antd-extensions/master/LICENSE)
+[MIT License](https://raw.githubusercontent.com/DFocusGroup/antd-extensions/master/LICENSE)
 
 [npm-url]: https://npmjs.org/package/antd-extensions
 [npm-image]: https://badge.fury.io/js/antd-extensions.png
-[david-url]: https://david-dm.org/DFocusFE/antd-extensions.png
-[travis-image]: https://api.travis-ci.com/DFocusFE/antd-extensions.svg?branch=master
-[travis-url]: https://travis-ci.com/DFocusFE/antd-extensions
-[coverage-image]: https://coveralls.io/repos/github/DFocusFE/antd-extensions/badge.svg?branch=master
-[coverage-url]: https://coveralls.io/github/DFocusFE/antd-extensions
+[david-url]: https://david-dm.org/DFocusGroup/antd-extensions.png
+[travis-image]: https://api.travis-ci.com/DFocusGroup/antd-extensions.svg?branch=master
+[travis-url]: https://travis-ci.com/DFocusGroup/antd-extensions
+[coverage-image]: https://coveralls.io/repos/github/DFocusGroup/antd-extensions/badge.svg?branch=master
+[coverage-url]: https://coveralls.io/github/DFocusGroup/antd-extensions
 [dt-url]: https://img.shields.io/npm/dt/antd-extensions.svg
 [license-url]: https://img.shields.io/npm/l/antd-extensions.svg

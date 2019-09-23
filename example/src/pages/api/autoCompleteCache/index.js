@@ -6,6 +6,13 @@ import withAPIDoc from '../../../Components/APIDoc'
 import PropsDoc from '../../../Components/PropsDoc'
 
 class AutoCompleteCacheDoc extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      value: null
+    }
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -40,16 +47,6 @@ localStorageKey={localStorageKey}
               description: '输入框提示语,默认无值undefined'
             },
             {
-              prop: 'onSearch',
-              type: 'Function',
-              description: (
-                <React.Fragment>
-                  获取选中记录或点击enter，返回输入值:
-                  <code className="codeRef">Function(value)</code>
-                </React.Fragment>
-              )
-            },
-            {
               prop: 'size',
               type: 'String',
               description: "'small','middle','large',默认为'large'"
@@ -73,6 +70,36 @@ localStorageKey={localStorageKey}
                   <code className="codeRef">&#123; width: '430px' &#125;</code>
                 </React.Fragment>
               )
+            },
+            {
+              prop: 'value',
+              type: 'String',
+              description: <React.Fragment>输入值</React.Fragment>
+            },
+            {
+              prop: 'isSearchAfterBlur',
+              type: 'Bool',
+              description: <React.Fragment>搜索后失焦，默认值: true</React.Fragment>
+            },
+            {
+              prop: 'onSearch',
+              type: 'Function',
+              description: (
+                <React.Fragment>
+                  获取选中记录或点击enter，返回输入值:
+                  <code className="codeRef">Function(value)</code>
+                </React.Fragment>
+              )
+            },
+            {
+              prop: 'onChange',
+              type: 'Function',
+              description: (
+                <React.Fragment>
+                  选中 option，或 input 的 value 变化时，返回输入值:
+                  <code className="codeRef">Function(value)</code>
+                </React.Fragment>
+              )
             }
           ]}
         />
@@ -80,13 +107,13 @@ localStorageKey={localStorageKey}
         <br />
 
         <div className="mapExample">
-          <h3>示例</h3>
+          <h3>示例01</h3>
           <AutoCompleteCache
             placeholder="提示语"
-            onSearch={val => {
-              console.log(val)
+            onSearch={value => {
+              console.log('demo01:: ', value)
             }}
-            localStorageKey="localStorageKey"
+            localStorageKey="localStorageKey01"
           />
 
           <br />
@@ -107,6 +134,55 @@ export default class Example extends React.Component {
       }}
       localStorageKey="localStorageKey"
     />
+      </div>
+    )
+  }
+}
+`}
+          </Highlight>
+        </div>
+
+        <br />
+        <br />
+        <div className="mapExample">
+          <h3>示例02</h3>
+          <AutoCompleteCache
+            value={this.state.value}
+            placeholder="提示语"
+            onSearch={value => {
+              console.log('demo02:: ', value)
+            }}
+            localStorageKey="localStorageKey02"
+            onChange={value => this.setState({ value })}
+          />
+
+          <br />
+          <br />
+
+          <Highlight language="jsx">
+            {`import React from 'react'
+import { AutoCompleteCache } from 'antd-extensions'
+
+export default class Example extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      value: null
+    }
+  }
+
+  render() {
+    return (
+      <div>
+      <AutoCompleteCache
+            value={this.state.value}
+            placeholder="提示语"
+            onSearch={value => {
+              console.log('demo02:: ', value)
+            }}
+            localStorageKey="localStorageKey02"
+            onChange={value => this.setState({ value })}
+          />
       </div>
     )
   }

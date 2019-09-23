@@ -1,5 +1,12 @@
 import { isArray } from '../../helpers/object'
 
+export function delay(func, wait, ...args) {
+  if (typeof func != 'function') {
+    throw new TypeError('Expected a function')
+  }
+  return setTimeout(func, +wait || 0, ...args)
+}
+
 export function uniqArray(data) {
   if (!isArray(data)) {
     return data

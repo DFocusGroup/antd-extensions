@@ -1,23 +1,24 @@
 {
-  "extends": [
-    "eslint-config-umi",
-    "plugin:prettier/recommended"
-  ],
-  "plugins": [
-    "prettier"
-  ],
+  "extends": ["react-app", "plugin:prettier/recommended"],
+  "plugins": ["prettier", "react", "react-hooks"],
   "env": {
     "jquery": true
   },
   "rules": {
+    "strict": "error",
+    "no-sequences": "error",
+    "no-mixed-operators": "error",
+    "react/react-in-jsx-scope": "error",
+    "no-useless-escape": "error",
     "max-len": [
       "error",
       {
         "code": 120
       }
     ],
-    "react/prop-types": [
-      "error"
-    ]
-  }
+    "react/prop-types": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
+  },
+  "settings": {}
 }

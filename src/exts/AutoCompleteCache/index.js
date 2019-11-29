@@ -129,6 +129,7 @@ class AutoCompleteCache extends Component {
           option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
         }
         ref={this.autoCompleteRef}
+        getPopupContainer={trigger => trigger.parentNode}
       >
         <Input onKeyDown={this._onKeyDown} />
       </AutoComplete>

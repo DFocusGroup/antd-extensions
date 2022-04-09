@@ -10,7 +10,7 @@
     "classnames": "^2.2.6",
     "dva": "^2.4.1",
     "lodash": "^4.17.15",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "path-to-regexp": "^3.0.0",
     "react": "^16.8.6",
     "react-syntax-highlighter": "^11.0.2"
